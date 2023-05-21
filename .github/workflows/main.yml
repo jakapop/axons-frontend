@@ -46,8 +46,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
           script: |
-            whoami
             cd axonstech
             pwd
-            npm i 
-            pm2 restart "npm run dev"
+            #pm2 restart "npm run dev"
