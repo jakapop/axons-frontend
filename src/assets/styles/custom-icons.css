@@ -1,0 +1,526 @@
+.add {
+  -webkit-mask: url(@/assets/img/icons/add.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/add.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.delete {
+  -webkit-mask: url(@/assets/img/icons/delete.svg)no-repeat center / contain;
+  mask: url(/@/ssets/img/icons/delete.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.delete2 {
+  -webkit-mask: url(@/assets/img/icons/delete.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/delete.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.close {
+  -webkit-mask: url(@/assets/img/icons/close.png)no-repeat center / contain;
+  mask: url(@/assets/img/icons/close.png)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.export {
+  -webkit-mask: url(@/assets/img/icons/export.png)no-repeat center / contain;
+  mask: url(@/assets/img/icons/export.png)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.location-icon {
+  -webkit-mask: url(@/assets/img/icons/location-icon.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/location-icon.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.temp {
+  -webkit-mask: url(@/assets/img/icons/temp.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/temp.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.cloud {
+  -webkit-mask: url(@/assets/img/icons/cloud.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/cloud.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.rain {
+  -webkit-mask: url(@/assets/img/icons/rain.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/rain.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.humidity_low {
+  -webkit-mask: url(@/assets/img/icons/humidity_low.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/humidity_low.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.air {
+  -webkit-mask: url(@/assets/img/icons/air.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/air.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.airware {
+  -webkit-mask: url(@/assets/img/icons/airware.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/airware.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.check {
+  -webkit-mask: url(@/assets/img/icons/check.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/check.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.qr_code_scanner {
+  -webkit-mask: url(@/assets/img/icons/qr_code_scanner.png)no-repeat center / contain;
+  mask: url(@/assets/img/icons/qr_code_scanner.png)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.close {
+  -webkit-mask: url(@/assets/img/icons/close.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/close.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 20px;
+  height: 20px;
+}
+
+.edit {
+  -webkit-mask: url(@/assets/img/icons/edit.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/edit.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 20px;
+  height: 20px;
+}
+
+.potted_plant {
+  -webkit-mask: url(@/assets/img/icons/potted_plant.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/potted_plant.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 20px;
+  height: 20px;
+}
+
+
+.home {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/home.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/home.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.home2 {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/home2.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/home2.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.potted_plant {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/potted_plant.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/potted_plant.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.power_button {
+  -webkit-mask: url(@/assets/img/svg/power_button.svg)no-repeat center / contain;
+  mask: url(@/assets/img/svg/power_button.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+/* icon device */
+.wow {
+  -webkit-mask: url(@/assets/img/svg/crisis_alert.svg)no-repeat center / contain;
+  mask: url(@/assets/img/svg/crisis_alert.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+.fan {
+  -webkit-mask: url(@/assets/img/svg/mode_fan.svg)no-repeat center / contain;
+  mask: url(@/assets/img/svg/mode_fan.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+.fi {
+  -webkit-mask: url(@/assets/img/svg/emoji_objects.svg)no-repeat center / contain;
+  mask: url(@/assets/img/svg/emoji_objects.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+.pump{
+  -webkit-mask: url(@/assets/img/svg/refresh.svg)no-repeat center / contain;
+  mask: url(@/assets/img/svg/refresh.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+.moter {
+  -webkit-mask: url(@/assets/img/svg/sentiment_satisfied.svg)no-repeat center / contain;
+  mask: url(@/assets/img/svg/sentiment_satisfied.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+.lightnoti {
+  -webkit-mask: url(@/assets/img/svg/lightnoti.svg)no-repeat center / contain;
+  mask: url(@/assets/img/svg/lightnoti.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+/* end icon device */
+.potted_plant2 {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/potted_plant2.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/potted_plant2.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.storefront {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/storefront.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/storefront.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.storefront2 {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/storefront2.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/storefront2.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.calculate {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/calculate.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/calculate.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.calculate2 {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/calculate2.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/calculate2.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.more_horiz {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/more_horiz.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/more_horiz.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+
+.select-down {
+  -webkit-mask: url(@/assets/img/icons/select-down.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/select-down.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.layers-soil {
+  -webkit-mask: url(@/assets/img/icons/layers-soil.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/layers-soil.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.explore {
+    -webkit-mask: url(@/assets/img/icons/explore.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/explore.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    width: 25px;
+    height: 25px;
+}
+
+.warning {
+    -webkit-mask: url(@/assets/img/icons/warning.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/warning.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    width: 25px;
+    height: 25px;
+}
+
+.mountain {
+    -webkit-mask: url(@/assets/img/icons/mountain.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/mountain.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    width: 25px;
+    height: 25px;
+}
+
+.triangle {
+    -webkit-mask: url(@/assets/img/icons/triangle.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/triangle.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+.water {
+    -webkit-mask: url(@/assets/img/icons/water.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/water.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    width: 25px;
+    height: 25px;
+}
+
+.share_location {
+    -webkit-mask: url(@/assets/img/icons/share_location.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/share_location.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    width: 25px;
+    height: 25px;
+}
+
+.managefarm {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/managefarm.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/managefarm.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.memory {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/memory.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/memory.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.climate {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/climate.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/climate.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.geography {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/geography.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/geography.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.paper {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/paper.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/paper.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.chart {
+    -webkit-mask: url(@/assets/img/icons/chart.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/chart.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    width: 25px;
+    height: 25px;
+}
+
+.support {
+    -webkit-mask: url(@/assets/img/icons/support.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/support.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    width: 25px;
+    height: 25px;
+}
+
+.potted-plant-card {
+  -webkit-mask: url(@/assets/img/icons/slide-bar/potted_plant.svg)no-repeat center / contain;
+  mask: url(@/assets/img/icons/slide-bar/potted_plant.svg)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.search {
+    -webkit-mask: url(@/assets/img/icons/search.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/search.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    width: 25px;
+    height: 25px;
+}
+
+.clock {
+    -webkit-mask: url(@/assets/img/icons/clock.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/clock.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+.call {
+    -webkit-mask: url(@/assets/img/icons/call.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/call.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+
+.map {
+    -webkit-mask: url(@/assets/img/icons/map.svg)no-repeat center / contain;
+    mask: url(@/assets/img/icons/map.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+.notbad-smile {
+    -webkit-mask: url(@/assets/img/svg/notbad_smile.svg)no-repeat center / contain;
+    mask: url(@/assets/img/svg/notbad_smile.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+.normal-smile {
+    -webkit-mask: url(@/assets/img/svg/normal_smile.svg)no-repeat center / contain;
+    mask: url(@/assets/img/svg/normal_smile.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+.very-smile {
+    -webkit-mask: url(@/assets/img/svg/very_smile.svg)no-repeat center / contain;
+    mask: url(@/assets/img/svg/very_smile.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+.star {
+    -webkit-mask: url(@/assets/img/svg/star.svg)no-repeat center / contain;
+    mask: url(@/assets/img/svg/star.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+.arrow-right {
+    -webkit-mask: url(@/assets/img/svg/arrow_right.svg)no-repeat center / contain;
+    mask: url(@/assets/img/svg/arrow_right.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+.download {
+    -webkit-mask: url(@/assets/img/svg/download.svg)no-repeat center / contain;
+    mask: url(@/assets/img/svg/download.svg)no-repeat center / contain;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+.upfw {
+  -webkit-mask: url(@/assets/img/icons/upfw.png)no-repeat center / contain;
+  mask: url(/@/ssets/img/icons/upfw.png)no-repeat center / contain;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 25px;
+  height: 25px;
+}
+
+.btn-custom-delete:hover img {
+    background-color: #E04C4F;
+}
+
+.btn-custom:hover img {
+    background-color: #01893D;
+}
+
+.custom-size-box {
+  height: 270px;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+}

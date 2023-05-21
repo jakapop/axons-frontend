@@ -1,0 +1,9 @@
+FROM node:16.18-alpine as builder
+
+WORKDIR /app
+
+RUN yarn global add cross-env
+
+COPY ./package.json .
+
+RUN yarn --ignore-optional --non-interactive --silent --production=false

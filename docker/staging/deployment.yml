@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmworld-vue-frontend
+  labels:
+    app: farmworld-vue-frontend
+spec:
+  selector:
+    matchLabels:
+      app: farmworld-vue-frontend
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: farmworld-vue-frontend
+    spec:
+      containers:
+        - name: farmworld-vue-frontend
+          image: IMAGE:TAG
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+          envFrom:
+            - configMapRef:
+                name: farmworld-vue-frontend-env
+          resources:
+            requests:
+              cpu: 128m
+              memory: 128M
+            limits:
+              cpu: 128m
+              memory: 128M
+      imagePullSecrets:
+        - name: gcr-json-key
+      volumes:
+        - name: data
+          emptyDir: {}
