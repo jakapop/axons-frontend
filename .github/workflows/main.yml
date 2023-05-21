@@ -44,4 +44,4 @@ jobs:
             cd axonstech
             pwd
             npm i 
-            pm2 restart server.js
+            pm2 restart "npm run dev"
