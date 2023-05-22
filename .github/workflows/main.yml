@@ -34,18 +34,17 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: "ec2-54-169-52-222.ap-southeast-1.compute.amazonaws.com"
+          REMOTE_HOST: "ec2-13-250-185-113.ap-southeast-1.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
-          TARGET: "/home/ubuntu/axonstech"
+          TARGET: "/home/ubuntu/test"
 
       - name: Post Deploy
         uses: appleboy/ssh-action@master
         with:
-          host: "ec2-54-169-52-222.ap-southeast-1.compute.amazonaws.com"
+          host: "ec2-13-250-185-113.ap-southeast-1.compute.amazonaws.com"
           username: "ubuntu"
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
           script: |
-            cd axonstech
+            cd test
             pwd
-            #pm2 restart "npm run dev"
