@@ -36,7 +36,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: "ec2-13-250-185-113.ap-southeast-1.compute.amazonaws.com"
           REMOTE_USER: "ubuntu"
-          TARGET: "/home/ubuntu/test"
+          TARGET: "/home/ubuntu/axonstech"
 
       - name: Post Deploy
         uses: appleboy/ssh-action@master
@@ -46,5 +46,5 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
           script: |
-            cd test
+            cd axonstech
             pwd
