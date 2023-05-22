@@ -209,7 +209,7 @@ const copyLink = async(link)  =>{
           <a href="https://www.facebook.com/AXONSofficial" target="_blank" class="flex flex-row items-center justify-start sm:justify-end text-white text-base font-medium mb-4 tracking-wide whitespace-nowrap"><img
               src="../assets/img/img_landingpage/Facebook_logo.svg" alt="youtube" class="mr-2"> AXONS</a>
           <a href="https://www.youtube.com/@axonsofficial9382" target="_blank" class="flex flex-row items-center justify-start sm:justify-end text-white text-base font-medium mb-4 tracking-wide whitespace-nowrap"><img
-              src="../assets/img/img_landingpage/YouTube_logo.svg" alt="line" class="mr-2">AXONS Officia5566</a>
+              src="../assets/img/img_landingpage/YouTube_logo.svg" alt="line" class="mr-2">AXONS Officia</a>
         </div>
       </div>
     </div>
