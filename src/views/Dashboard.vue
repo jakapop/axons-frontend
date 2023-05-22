@@ -83,6 +83,22 @@ const getDirection = (degrees)=>{
   }
 
 };
+
+const rainfall = (rainfallVolume)=>{
+
+  console.log(rainfallVolume);
+  if (rainfallVolume >= 0.1 && rainfallVolume <= 10) {
+    return "ฝนตกเล็กน้อย";
+  } else if (rainfallVolume > 10 && rainfallVolume <= 35) {
+    return "ฝนตกปานกลาง";
+  } else if (rainfallVolume > 35 && rainfallVolume <= 90) {
+    return "ฝนตกหนัก";
+  } else if (rainfallVolume > 90) {
+    return "ฝนตกหนักมาก";
+  } else {
+    return "ไม่มีฝนตก";
+  }
+};
 </script>
 <template>
   <NavbarMain>
@@ -144,8 +160,10 @@ const getDirection = (degrees)=>{
                       {{ sensor.result_sensor }}
                     </p>
                     <p class="text-gray-700 text-base text-center md:text-xl mt-3 mb-4">
+                     
                       <span v-if="sensor.name.th == 'ทิศทางลม'">{{ sensor.unit.th }} / {{ getDirection(sensor.result_sensor) }}</span>
                       <span v-else>{{ sensor.unit.th }} </span>
+                      <span v-if="sensor.name.th == 'ปริมาณนํ้าฝน'" class="block text-black">( {{rainfall(sensor.result_sensor)}} )</span>
                     </p>
                   </div>
                   <div class="px-6 text-center">
