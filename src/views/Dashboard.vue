@@ -144,7 +144,7 @@ const getDirection = (degrees)=>{
                       {{ sensor.result_sensor }}
                     </p>
                     <p class="text-gray-700 text-base text-center md:text-xl mt-3 mb-4">
-                      <span v-if="sensor.name.th == 'ทิศทางลม'">{{ getDirection(sensor.result_sensor) }}</span>
+                      <span v-if="sensor.name.th == 'ทิศทางลม'">{{ sensor.unit.th }} / {{ getDirection(sensor.result_sensor) }}</span>
                       <span v-else>{{ sensor.unit.th }} </span>
                     </p>
                   </div>
