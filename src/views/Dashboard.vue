@@ -41,7 +41,7 @@ onMounted(() => {
   //2309SWCSTXJ47BC
   ApiCore.get("/v2/boards/" + boards + "/sensor").then((response) => {
     state.boards = response.data.data.sensors;
-    //console.log(state.boards);
+    console.log('sensor boards == ',state.boards);
     //Object.keys(state.boards).forEach(function (key) {
     // console.log(state.boards[key].items_id);
     //state.boards[key]["icon"] = getImageUrl(state.boards[key].id)
@@ -58,6 +58,31 @@ onMounted(() => {
     //console.log(state.group);
   });
 });
+
+
+const getDirection = (degrees)=>{
+  console.log('value == '+degrees,typeof(degrees));
+  if (degrees >= 337.5 || degrees < 22.5) {
+    return "ทิศเหนือ ( N )";
+  } else if (degrees >= 22.5 && degrees < 67.5) {
+    return "ภาคตะวันออกเฉียงเหนือ ( NE )";
+  } else if (degrees >= 67.5 && degrees < 112.5) {
+    return "ทิศตะวันออก (E)";
+  } else if (degrees >= 112.5 && degrees < 157.5) {
+    return "ทิศตะวันออกเฉียงใต้ ( SE )";
+  } else if (degrees >= 157.5 && degrees < 202.5) {
+    return "ทิศใต้ ( S )";
+  } else if (degrees >= 202.5 && degrees < 247.5) {
+    return "ทิศตะวันตกเฉียงใต้ (SW)";
+  } else if (degrees >= 247.5 && degrees < 292.5) {
+    return "ทิศตะวันตก ( W )";
+  } else if (degrees >= 292.5 && degrees < 337.5) {
+    return " ทิศตะวันตกเฉียงเหนือ(NW)";
+  } else {
+    return "Invalid degrees";
+  }
+
+};
 </script>
 <template>
   <NavbarMain>
@@ -119,9 +144,8 @@ onMounted(() => {
                       {{ sensor.result_sensor }}
                     </p>
                     <p class="text-gray-700 text-base text-center md:text-xl mt-3 mb-4">
-                      
-                      <span v-if="sensor.unit.th == 'องศาเซลเซียล'">องศาเซลเซียส</span>
-                      <span v-else>{{ sensor.unit.th }}</span>
+                      <span v-if="sensor.name.th == 'ทิศทางลม'">{{ getDirection(sensor.result_sensor) }}</span>
+                      <span v-else>{{ sensor.unit.th }} </span>
                     </p>
                   </div>
                   <div class="px-6 text-center">
