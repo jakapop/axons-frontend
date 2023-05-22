@@ -160,9 +160,16 @@ const rainfall = (rainfallVolume)=>{
                       {{ sensor.result_sensor }}
                     </p>
                     <p class="text-gray-700 text-base text-center md:text-xl mt-3 mb-4">
-                     
                       <span v-if="sensor.name.th == 'ทิศทางลม'">{{ sensor.unit.th }} / {{ getDirection(sensor.result_sensor) }}</span>
-                      <span v-else>{{ sensor.unit.th }} </span>
+                      <span v-else-if="sensor.name.th != 'ฝุ่น PM 2.5'">
+                        <span v-if="sensor.unit.th == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="sensor.unit.th == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="sensor.unit.th == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                        <span v-else>{{ sensor.unit.th }} </span>
+                      </span>
+                      
+
+                      <span v-if="sensor.name.th == 'ฝุ่น PM 2.5' &&sensor.unit.th == 'µg./m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-if="sensor.name.th == 'ปริมาณนํ้าฝน'" class="block text-black">( {{rainfall(sensor.result_sensor)}} )</span>
                     </p>
                   </div>
