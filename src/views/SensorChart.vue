@@ -404,7 +404,7 @@ const check_pH = (pH) => {
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-else-if="state.sensor_name_th =='ทิศทางลม'">{{ state.sensor_unit_en }} {{ getDirection(state.avg_all) }} </span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'"  > ( {{ check_pH(state.avg_all) }} ) </span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">uW/<span>cm<sup>2</sup></span></span>
                         <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
                         <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                         <span v-else>{{ state.sensor_unit_en  }} </span>
@@ -416,8 +416,8 @@ const check_pH = (pH) => {
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
                         <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
@@ -425,8 +425,8 @@ const check_pH = (pH) => {
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
                         <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
@@ -435,8 +435,8 @@ const check_pH = (pH) => {
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8">
                   <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5'">{{ state.sensor_unit_th }} ( µg /<span>m<sup>3</sup></span> )</span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'" >ความเป็นกรดด่าง (pH)</span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">{{ state.sensor_unit_th }} (uW/<span>cm<sup>2</sup>)</span></span>
-                      <span v-else-if="state.sensor_unit_en  == 'mW/m2'">{{ state.sensor_unit_th }} (uW/<span>m<sup>2</sup>)</span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">{{ state.sensor_unit_th }} (μW/<span>cm<sup>2</sup>)</span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/m2'">{{ state.sensor_unit_th }} (μW/<span>m<sup>2</sup>)</span></span>
                       <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">{{ state.sensor_unit_th }} (μmol/<span>m<sup>2</sup></span>/s)</span>
                       <span v-else>{{state.sensor_unit_th }} ( {{ state.sensor_unit_en  }} ) </span>
                 </p>
@@ -456,8 +456,8 @@ const check_pH = (pH) => {
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-else-if="state.sensor_name_th =='ทิศทางลม'">{{ state.sensor_unit_en }} {{ getDirection(state.avg_all) }} </span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'"  > ( {{ check_pH(state.avg_all) }} ) </span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
-                      <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
                       <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
@@ -467,8 +467,8 @@ const check_pH = (pH) => {
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
                         <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
@@ -476,8 +476,8 @@ const check_pH = (pH) => {
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
                         <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
@@ -486,8 +486,8 @@ const check_pH = (pH) => {
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8">
                   <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5'">{{ state.sensor_unit_th }} ( µg /<span>m<sup>3</sup></span> )</span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'" >ความเป็นกรดด่าง (pH)</span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">{{ state.sensor_unit_th }} (uW/<span>cm<sup>2</sup>)</span></span>
-                      <span v-else-if="state.sensor_unit_en  == 'mW/m2'">{{ state.sensor_unit_th }} (uW/<span>m<sup>2</sup>)</span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">{{ state.sensor_unit_th }} (μW/<span>cm<sup>2</sup>)</span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/m2'">{{ state.sensor_unit_th }} (μW/<span>m<sup>2</sup>)</span></span>
                       <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">{{ state.sensor_unit_th }} (μmol/<span>m<sup>2</sup></span>/s)</span>
                       <span v-else>{{state.sensor_unit_th }} ( {{ state.sensor_unit_en  }} ) </span>
                 </p>
@@ -513,8 +513,8 @@ const check_pH = (pH) => {
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-else-if="state.sensor_name_th =='ทิศทางลม'">{{ state.sensor_unit_en }} {{ getDirection(state.avg_all) }} </span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'"  > ( {{ check_pH(state.avg_all) }} ) </span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
-                      <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
                       <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
@@ -524,8 +524,8 @@ const check_pH = (pH) => {
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
                         <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
@@ -533,8 +533,8 @@ const check_pH = (pH) => {
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
                       <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
                         <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
@@ -543,8 +543,8 @@ const check_pH = (pH) => {
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8">
                   <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5'">{{ state.sensor_unit_th }} ( µg /<span>m<sup>3</sup></span> )</span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'" >ความเป็นกรดด่าง (pH)</span>
-                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">{{ state.sensor_unit_th }} (uW/<span>cm<sup>2</sup>)</span></span>
-                      <span v-else-if="state.sensor_unit_en  == 'mW/m2'">{{ state.sensor_unit_th }} (uW/<span>m<sup>2</sup>)</span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">{{ state.sensor_unit_th }} (μW/<span>cm<sup>2</sup>)</span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/m2'">{{ state.sensor_unit_th }} (μW/<span>m<sup>2</sup>)</span></span>
                       <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">{{ state.sensor_unit_th }} (μmol/<span>m<sup>2</sup></span>/s)</span>
                       <span v-else>{{state.sensor_unit_th }} ( {{ state.sensor_unit_en  }} ) </span>
                 </p>
