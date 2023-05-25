@@ -107,7 +107,7 @@ const get_report = () => {
     states.avg_min = min.toFixed(1);
     const lowerValueColor = copydatapoints.map((datapoint, index) => {
       if (min == datapoint) {
-        bgc.splice(index, 1, "#154293");
+        bgc.splice(index, 1, "#98EECC");
       }
     });
 
