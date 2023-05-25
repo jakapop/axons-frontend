@@ -101,7 +101,7 @@ const rainfall = (rainfallVolume) => {
 
 
 const check_pH = (pH) => {
-
+  
   if (pH < 3.5) {
     return 'กรดรุนแรงที่สุด';
   } else if (pH >= 3.5 && pH <= 4.5) {
@@ -115,7 +115,7 @@ const check_pH = (pH) => {
   } else if (pH >= 6.1 && pH <= 6.5) {
     return 'กรดเล็กน้อย';
   } else if (pH >= 6.6 && pH <= 7.3) {
-    return 'กลาง';
+    return 'เป็นกลาง';
   } else if (pH >= 7.4 && pH <= 7.8) {
     return 'ด่างเล็กน้อย';
   } else if (pH >= 7.9 && pH <= 8.4) {
