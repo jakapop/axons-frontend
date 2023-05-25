@@ -340,12 +340,13 @@ const handleClick = (event) => {
 
   localStorage.setItem('count_noti',state.notiCount);
 
-  console.log(state.notiToday);
+  console.log('state.notiCount == ',state.notiCount);
   oldCount.value = state.notiCount;
   if(state.notiToday.length == 0){
     isMenuOpen.value = false ;
   }else{
     console.log('toggle');
+    localStorage.setItem('old_count_noti',state.notiCount);
     isMenuOpen.value = !isMenuOpen.value ;
   }
 
