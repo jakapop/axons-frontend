@@ -17,7 +17,7 @@ const url = new URL(window.location.href);
 let state = reactive({
   serial: url.searchParams.get("board"),
   sensor_id: url.searchParams.get("sid"),
-  board_name:'',
+  board_name: '',
   sensor_name_th: "",
   sensor_name_en: "",
   sensor_unit_th: "",
@@ -52,11 +52,11 @@ const setActive = (status) => {
 };
 
 onMounted(() => {
-  ApiCore.get("/v2/projects/"+mainStore.CustomerFarmId+"/boards/" + state.serial ).then((response) => {
+  ApiCore.get("/v2/projects/" + mainStore.CustomerFarmId + "/boards/" + state.serial).then((response) => {
 
     console.log(response);
 
-    if (typeof response.data.data[0] !== 'undefined'){
+    if (typeof response.data.data[0] !== 'undefined') {
       state.board_name = response.data.data[0].name
     }
     let board_name = document.querySelector("#board_name");
@@ -79,10 +79,10 @@ onMounted(() => {
         get_report("report-day");
 
       }
-      else if(tabName == "#hour") {
+      else if (tabName == "#hour") {
         get_report("report-hour");
       }
-      else if(tabName == "#month") {
+      else if (tabName == "#month") {
         get_report("report-month");
       }
 
@@ -107,7 +107,7 @@ onMounted(() => {
 
   ApiCore.get("/v2/sensors/" + state.sensor_id).then((response) => {
 
-    console.log("sensor == ",response);
+    console.log("sensor == ", response);
 
     state.sensor_name_th = response.data.data.name.th;
     state.sensor_name_en = response.data.data.name.en;
@@ -180,7 +180,7 @@ const get_report = (period) => {
     state.avg_min = min.toFixed(1);
     const lowerValueColor = copydatapoints.map((datapoint, index) => {
       if (min == datapoint) {
-        bgc.splice(index, 1, "#154293");
+        bgc.splice(index, 1, "#98EECC");
       }
     });
 
@@ -209,65 +209,89 @@ const get_report = (period) => {
     };
 
     // config
-      // config
-      const config = {
-        type: 'bar',
-        data,
-        options: {
-          layout: {
-            padding: 20
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
+    // config
+    const config = {
+      type: 'bar',
+      data,
+      options: {
+        layout: {
+          padding: 20
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
 
-              //  },
-              // title: {
-              //     display: true,
-              //     text: 'อุณหภูมิ ( °C)'
-              // }
+            //  },
+            // title: {
+            //     display: true,
+            //     text: 'อุณหภูมิ ( °C)'
+            // }
+          },
+          x: {
+            beginAtZero: true,
+            font: {
+              weight: 'bold',
+              family: 'IBM Plex Sans Thai'
             },
-            x: {
-              beginAtZero: true,
+            grid: {
+              display: false,
+            },
+            title: {
+              display: true,
+              // text: 'วันที่',
               font: {
                 weight: 'bold',
-                family: 'IBM Plex Sans Thai'
-              },
-              grid: {
-                display: false,
-              },
-              title: {
-                display: true,
-                // text: 'วันที่',
-                font: {
-                  weight: 'bold',
-                  family: 'IBM Plex Sans Thai',
-                }
+                family: 'IBM Plex Sans Thai',
               }
-            },
-          },
-          plugins: {
-            // tooltip: {
-            //     enabled : true
-            // },
-            legend: {
-              display: false,
             }
           },
-          responsive: true,
-          maintainAspectRatio: false
         },
-        //   plugins: [alwaysShowTootip]
-      };
+        plugins: {
+          // tooltip: {
+          //     enabled : true
+          // },
+          legend: {
+            display: false,
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      },
+      //   plugins: [alwaysShowTootip]
+    };
 
     // render init block
     // Chart.defaults.font.size = 22;
-     try{
+    try {
       let hourChart = new Chart(document.getElementById(period), config);
-     }catch(e){
-     }
+    } catch (e) {
+    }
 
   });
+};
+
+
+const getDirection = (degrees)=>{
+  if (degrees >= 337.5 || degrees < 22.5) {
+    return " ( N )";
+  } else if (degrees >= 22.5 && degrees < 67.5) {
+    return " ( NE )";
+  } else if (degrees >= 67.5 && degrees < 112.5) {
+    return " (E)";
+  } else if (degrees >= 112.5 && degrees < 157.5) {
+    return " ( SE )";
+  } else if (degrees >= 157.5 && degrees < 202.5) {
+    return " ( S )";
+  } else if (degrees >= 202.5 && degrees < 247.5) {
+    return " (SW)";
+  } else if (degrees >= 247.5 && degrees < 292.5) {
+    return " ( W )";
+  } else if (degrees >= 292.5 && degrees < 337.5) {
+    return " (NW)";
+  } else {
+    return "Invalid degrees";
+  }
+
 };
 </script>
 
@@ -285,22 +309,27 @@ const get_report = (period) => {
         </div>
         <div class="py-4 rounded-[16px] bg-[#fff]">
           <div class="font-bold text-[12px] md:text-lg xl:text-2xl mb-2 ml-1 md:ml-[12px]">
-            <img class="inline w-6 md:w-10 xl:w-16" style="margin-left: 4px" :src="`img/sensor/${state.sensor_id}.png`" alt=""/>
+            <img class="inline w-6 md:w-10 xl:w-16" style="margin-left: 4px" :src="`img/sensor/${state.sensor_id}.png`"
+              alt="" />
             {{ state.sensor_name_th }}
           </div>
           <div class="w-full mt-4">
             <div class="flex flex-row text-center pt-2 px-2 md:px-8">
               <div id="tabs" class="inline-flex w-full items-center justify-between gap-2">
-                <a id="default-tab" href="#hour" @click="setActive(1)" :class="{ active: active_btn == 1 }" class="text-[#837D7B] w-full py-1.5 px-4 rounded-lg cursor-pointer bg-[#F3F2F0]">
+                <a id="default-tab" href="#hour" @click="setActive(1)" :class="{ active: active_btn == 1 }"
+                  class="text-[#837D7B] w-full py-1.5 px-4 rounded-lg cursor-pointer bg-[#F3F2F0]">
                   ชั่วโมง
                 </a>
-                <a  href="#day"  @click="setActive(2)" :class="{ active: active_btn == 2 }" class=" text-[#837D7B] w-full py-1.5 px-4 rounded-lg cursor-pointer bg-[#F3F2F0]">
+                <a href="#day" @click="setActive(2)" :class="{ active: active_btn == 2 }"
+                  class=" text-[#837D7B] w-full py-1.5 px-4 rounded-lg cursor-pointer bg-[#F3F2F0]">
                   วัน
                 </a>
-                <a href="#month" @click="setActive(3)" :class="{ active: active_btn == 3 }" class=" text-[#837D7B] w-full py-1.5 px-4 rounded-lg cursor-pointer bg-[#F3F2F0]">
+                <a href="#month" @click="setActive(3)" :class="{ active: active_btn == 3 }"
+                  class=" text-[#837D7B] w-full py-1.5 px-4 rounded-lg cursor-pointer bg-[#F3F2F0]">
                   เดือน
                 </a>
-                <a href="#year" @click="setActive(4)" :class="{ active: active_btn == 4 }" class=" text-[#837D7B] w-full py-1.5 px-4 rounded-lg cursor-pointer bg-[#F3F2F0]">
+                <a href="#year" @click="setActive(4)" :class="{ active: active_btn == 4 }"
+                  class=" text-[#837D7B] w-full py-1.5 px-4 rounded-lg cursor-pointer bg-[#F3F2F0]">
                   ปี
                 </a>
               </div>
@@ -336,22 +365,47 @@ const get_report = (period) => {
               <div id="hour">
                 <div class="grid grid-cols-3 gap-2 pt-2 px-2 md:px-8 ">
                   <div class="col-span-2 text-xs md:text-lg font-medium my-auto">
-                    <p>ข้อมูล : <span class="text-[#01893D]">วันที่ {{ daynow }} เดือน {{monthnow}} พ.ศ. {{yearnow}}</span> </p>
-                    <p>ค่าเฉลี่ย : {{ state.avg_all }} {{ state.sensor_unit_en }}</p>
+                    <p>ข้อมูล : <span class="text-[#01893D]">วันที่ {{ daynow }} เดือน {{ monthnow }} พ.ศ.
+                        {{ yearnow }}</span> </p>
+                    <p>
+                      ค่าเฉลี่ย : {{ state.avg_all }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" id="wind" >{{ state.sensor_unit_en }} </span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                        <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
+
                   </div>
                   <div class="text-xs md:text-lg font-medium md:text-right ml-auto">
-                    <p>ค่าสูงสุด : {{ state.avg_max }} {{ state.sensor_unit_en }}</p>
-                    <p>ค่าต่ำสุด : {{ state.avg_min }} {{ state.sensor_unit_en }}</p>
+                    <p>ค่าสูงสุด : {{ state.avg_max }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }} </span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
+                    <p>ค่าต่ำสุด : {{ state.avg_min }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
                   </div>
                 </div>
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8">
-                  <span v-if="state.sensor_unit_th == 'องศาเซลเซียล'">องศาเซลเซียส  ( {{ state.sensor_unit_en }} )</span>
-                  <span v-else> {{ state.sensor_unit_th }} ( {{ state.sensor_unit_en }} )</span>
+                  <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" > {{ state.sensor_unit_th }} {{ state.sensor_unit_en }}</span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                      <span v-else>{{state.sensor_unit_th }} ( {{ state.sensor_unit_en  }} ) </span>
                 </p>
-                <div
-                  class="chart-container"
-                  style="position: relative; height:290px; width:100%"
-                >
+                <div class="chart-container" style="position: relative; height:290px; width:100%">
                   <canvas id="report-hour"></canvas>
                 </div>
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8 text-center -mt-8">
@@ -361,23 +415,40 @@ const get_report = (period) => {
               <div id="day" class="hidden">
                 <div class="grid grid-cols-3 gap-2 pt-2 px-2 md:px-8">
                   <div class="col-span-2 text-xs md:text-lg font-medium my-auto">
-                    <p>ข้อมูล : <span class="text-[#01893D]">เดือน {{monthnow}} พ.ศ. {{yearnow}}</span> </p>
-                    <p>ค่าเฉลี่ย : {{ state.avg_all }} {{ state.sensor_unit_en }}</p>
+                    <p>ข้อมูล : <span class="text-[#01893D]">เดือน {{ monthnow }} พ.ศ. {{ yearnow }}</span> </p>
+                    <p>
+                      ค่าเฉลี่ย : {{ state.avg_all }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }} {{ getDirection(state.sensor_unit_en) }}</span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                        <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
                   </div>
                   <div class="text-xs md:text-lg font-medium md:text-right ml-auto">
-                    <p>ค่าสูงสุด : {{ state.avg_max }} {{ state.sensor_unit_en }}</p>
-                    <p>ค่าต่ำสุด : {{ state.avg_min }} {{ state.sensor_unit_en }}</p>
-
+                    <p>ค่าสูงสุด : {{ state.avg_max }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }} {{ getDirection(state.sensor_unit_en) }}</span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
+                    <p>ค่าต่ำสุด : {{ state.avg_min }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }} {{ getDirection(state.sensor_unit_en) }}</span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
                   </div>
                 </div>
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8">
-                  <span v-if="state.sensor_unit_th == 'องศาเซลเซียล'">องศาเซลเซียส  ( {{ state.sensor_unit_en }} )</span>
-                  <span v-else> {{ state.sensor_unit_th }} ( {{ state.sensor_unit_en }} )</span>
+                  <span> {{ state.sensor_unit_th }} ( {{ state.sensor_unit_en }} )</span>
                 </p>
-                <div
-                  class="chart-container"
-                  style="position: relative; height:290px; width:100%"
-                >
+                <div class="chart-container" style="position: relative; height:290px; width:100%">
                   <canvas id="report-day"></canvas>
                 </div>
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8 text-center -mt-8">
@@ -393,23 +464,42 @@ const get_report = (period) => {
               <div id="month" class="hidden">
                 <div class="grid grid-cols-3 gap-2 pt-2 px-2 md:px-8">
                   <div class="col-span-2 text-xs md:text-lg font-medium my-auto ">
-                    <p>ข้อมูล : <span class="text-[#01893D]">พ.ศ. {{yearnow}}</span> </p>
-                    <p>ค่าเฉลี่ย : {{ state.avg_all }} {{ state.sensor_unit_en }}</p>
+                    <p>ข้อมูล : <span class="text-[#01893D]">พ.ศ. {{ yearnow }}</span> </p>
+                    <p>
+                      ค่าเฉลี่ย : {{ state.avg_all }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }} {{ getDirection(state.sensor_unit_en) }}</span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                        <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
                   </div>
                   <div class="text-xs md:text-lg font-medium md:text-right ml-auto">
-                    <p>ค่าสูงสุด : {{ state.avg_max }} {{ state.sensor_unit_en }}</p>
-                    <p>ค่าต่ำสุด : {{ state.avg_min }} {{ state.sensor_unit_en }}</p>
+                    <p>ค่าสูงสุด : {{ state.avg_max }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }} {{ getDirection(state.sensor_unit_en) }}</span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
+                    <p>ค่าต่ำสุด : {{ state.avg_min }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }} {{ getDirection(state.sensor_unit_en) }}</span>
+                      <span v-else-if="state.sensor_unit_en  == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
 
                   </div>
                 </div>
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8">
-                  <span v-if="state.sensor_unit_th == 'องศาเซลเซียล'">องศาเซลเซียส  ( {{ state.sensor_unit_en }} )</span>
+                  <span v-if="state.sensor_unit_th == 'องศาเซลเซียล'">องศาเซลเซียส ( {{ state.sensor_unit_en }} )</span>
                   <span v-else> {{ state.sensor_unit_th }} ( {{ state.sensor_unit_en }} )</span>
                 </p>
-                <div
-                  class="chart-container"
-                  style="position: relative; height:290px; width:100%"
-                >
+                <div class="chart-container" style="position: relative; height:290px; width:100%">
                   <canvas id="report-month"></canvas>
                 </div>
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8 text-center -mt-8">
@@ -417,10 +507,7 @@ const get_report = (period) => {
                 </p>
               </div>
               <div id="year" class="hidden">
-                <div
-                  class="chart-container"
-                  style="position: relative; height:290px; width:100%"
-                >
+                <div class="chart-container" style="position: relative; height:290px; width:100%">
                   <canvas id="report-year"></canvas>
                 </div>
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8 text-center -mt-8">
@@ -438,7 +525,7 @@ const get_report = (period) => {
 <style scoped>
 @import "@/assets/styles/custom-icons.css";
 
-input:checked ~ .dot {
+input:checked~.dot {
   transform: translateX(100%);
   background-color: #48bb78;
 }
@@ -462,5 +549,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: #01893D;
   color: white;
 }
-
 </style>

@@ -167,6 +167,7 @@ const rainfall = (rainfallVolume)=>{
                         <span v-else-if="sensor.unit.th == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
                         <span v-else>{{ sensor.unit.th }} </span>
                       </span>
+                      <span v-else-if="sensor.name.th == 'ฝุ่น PM 2.5'">μg/<span>m<sup>3</sup></span></span>
                       
 
                       <span v-if="sensor.name.th == 'ฝุ่น PM 2.5' &&sensor.unit.th == 'µg./m3'">µg /<span>m<sup>3</sup></span></span>
