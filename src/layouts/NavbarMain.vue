@@ -159,7 +159,7 @@ onMounted(() => {
     });
     state.notiToday = filteredData ;
 
-    console.log(state.notiToday);
+    // console.log(state.notiToday);
 
   })
 
