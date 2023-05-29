@@ -170,21 +170,26 @@ const get_report = (period) => {
         labels.push(i);
       }
 
-      // จะหาค่า max min โดยที่ไม่เอาวันที่ยังมาไม่ถึงมาคำนวณ
-      // 1. จะต้องเช็ควันก่อน ถ้าวันไม่เกินวันปัจจุบันให้เข้าเงื่อนไข
-
-    // let day_ =  labels.filter(day =>day <= moment().date()-1)
-    // console.log(day_);
-
 
     }else if (period == "report-month") {
       
       for (let i = 0; i <= month.length; i++) {
         let ele = month[i] ;
         labels.push(ele);
+
+        let filteredData = report_data.filter(obj => new Date(obj.event_time).getMonth() === i+1);
+        console.log(filteredData);
+
+        if(filteredData.length == 0){
+          datapoints.push('0');
+
+        }
+        else{
+          datapoints.push(filteredData[0].avg);
+        }
       }
       
-      
+      // report_data.filter(item=>item.event_time==i) ;
     }
 
     Object.entries(report_data).forEach(([key, val]) => {
@@ -198,11 +203,17 @@ const get_report = (period) => {
     });
     if(period == "report-day"){
       const filteredArray =  datapoints.filter(value => value !== '0') ;
-    max = Math.max(...filteredArray);
-    min = Math.min(...filteredArray);
+      max = Math.max(...filteredArray);
+      min = Math.min(...filteredArray);
     }else { 
-      max = Math.max(...datapoints);
-      min = Math.min(...datapoints);
+      
+      if((max !=  -Infinity || max != Infinity) || (min !=  -Infinity || min != Infinity)  ){
+        max = Math.max(...datapoints);
+        min = Math.min(...datapoints);
+      }else{
+        max = 0;
+        min = 0 ;
+      }
     }
 
     console.log('datapoints == ',datapoints);
@@ -220,13 +231,20 @@ const get_report = (period) => {
 
     state.avg_max = max.toFixed(1); //ค่าสูงสุด
     state.avg_min = min.toFixed(1); //ค่าต่ำสุด
+    if((state.avg_max ==  -Infinity || state.avg_max == Infinity) || (state.avg_min ==  -Infinity || state.avg_min == Infinity)  ){
+      state.avg_max = 0;
+      state.avg_min = 0 ;
+    }
 
     console.log('max == ',max,'min == ',min);
     console.log('state.avg_max',state.avg_max);
+
+    
+    
   
     const highestValueColor = datapoints.map((datapoint, index) => {
       console.log('index='+index + ' || '+max+'=='+datapoint);
-      const color = datapoint == max ? "#154293" : "rgba(41, 137, 6, 1)";
+      const color = datapoint == max ? "#074E9F" : "#01893D";
       bgc.push(color);
       if (max == datapoint) {
         copydatapoints.splice(index, 1, 0);
@@ -236,7 +254,7 @@ const get_report = (period) => {
     const lowerValueColor = datapoints.map((datapoint, index) => {
       
       if (min == datapoint) {
-        bgc.splice(index, 1, "#C7E9B0");
+        bgc.splice(index, 1, "#0086C9");
       }
     });
 
@@ -423,30 +441,37 @@ const check_pH = (pH) => {
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
                   </div>
-                  <div class="text-xs md:text-lg font-medium md:text-right">
-                    <div class="relative"> 
-                      <div class="absolute top-1.5 right-36 bg-[#154293] w-[30px] h-[16px]"></div> 
-                      <span>ค่าสูงสุด : {{ state.avg_max }}</span>
-                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
-                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
-                      <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
-                      <span v-else>{{ state.sensor_unit_en  }} </span>
-                    </div>
-                    <div class="relative">
-                      <div class="absolute top-1.5 right-36 bg-[#C7E9B0] w-[30px] h-[16px]"></div> 
-                      ค่าต่ำสุด : {{ state.avg_min }}
-                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
-                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
-                      <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
-                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                  <div class="flex flex-row justify-end">
+                    <div >
+                      <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#074E9F] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าสูงสุด : {{ state.avg_max }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      <div>
+                        <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#0086C9] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าต่ำสุด : {{ state.avg_min }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      </div>
                     </div>
                   </div>
+                  
                 </div>
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8 mt-4">
                   <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5'">{{ state.sensor_unit_th }} ( µg /<span>m<sup>3</sup></span> )</span>
@@ -478,28 +503,34 @@ const check_pH = (pH) => {
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
                   </div>
-                  <div class="text-xs md:text-lg font-medium md:text-right ml-auto">
-                    <div class="relative">
-                      <div class="absolute top-1.5 right-36 bg-[#154293] w-[30px] h-[16px]"></div> 
-                      ค่าสูงสุด : {{ state.avg_max }}
-                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
-                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
-                      <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
-                      <span v-else>{{ state.sensor_unit_en  }} </span>
-                    </div>
-                    <div class="relative">
-                      <div class="absolute top-1.5 right-36 bg-[#C7E9B0] w-[30px] h-[16px]"></div> 
-                      ค่าต่ำสุด : {{ state.avg_min }}
-                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
-                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
-                      <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
-                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                  <div class="flex flex-row justify-end">
+                    <div >
+                      <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#074E9F] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าสูงสุด : {{ state.avg_max }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      <div>
+                        <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#0086C9] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าต่ำสุด : {{ state.avg_min }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -539,28 +570,34 @@ const check_pH = (pH) => {
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
                   </div>
-                  <div class="text-xs md:text-lg font-medium md:text-right ml-auto">
-                    <div class="relative">
-                      <div class="absolute top-1.5 right-36 bg-[#154293] w-[30px] h-[16px]"></div> 
-                      ค่าสูงสุด : {{ state.avg_max }}
-                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
-                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
-                      <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
-                      <span v-else>{{ state.sensor_unit_en  }} </span>
-                    </div>
-                    <div class="relative">
-                      <div class="absolute top-1.5 right-36 bg-[#C7E9B0] w-[30px] h-[16px]"></div> 
-                      ค่าต่ำสุด : {{ state.avg_min }}
-                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
-                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
-                      <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
-                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                  <div class="flex flex-row justify-end">
+                    <div >
+                      <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#074E9F] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าสูงสุด : {{ state.avg_max }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      <div>
+                        <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#0086C9] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าต่ำสุด : {{ state.avg_min }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -594,28 +631,34 @@ const check_pH = (pH) => {
                       <span v-else>{{ state.sensor_unit_en  }} </span>
                     </p>
                   </div>
-                  <div class="text-xs md:text-lg font-medium md:text-right ml-auto">
-                    <div class="relative">
-                      <div class="absolute top-1.5 right-36 bg-[#154293] w-[30px] h-[16px]"></div> 
-                      ค่าสูงสุด : {{ state.avg_max }}
-                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
-                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
-                      <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
-                      <span v-else>{{ state.sensor_unit_en  }} </span>
-                    </div>
-                    <div class="relative">
-                      <div class="absolute top-1.5 right-36 bg-[#C7E9B0] w-[30px] h-[16px]"></div> 
-                      ค่าต่ำสุด : {{ state.avg_min }}
-                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
-                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
-                      <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
-                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
-                        <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
-                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                  <div class="flex flex-row justify-end">
+                    <div >
+                      <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#074E9F] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าสูงสุด : {{ state.avg_max }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      <div>
+                        <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#0086C9] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าต่ำสุด : {{ state.avg_min }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      </div>
                     </div>
                   </div>
                 </div>

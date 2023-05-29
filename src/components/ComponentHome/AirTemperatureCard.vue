@@ -96,7 +96,7 @@ const get_report = () => {
     states.avg_max = max.toFixed(1);
     const highestValueColor = datapoints.map((datapoint, index) => {
       const color =
-        datapoint == max ? "#154293" : "rgba(41, 137, 6, 1)";
+        datapoint == max ? "#074E9F" : "#01893D";
       bgc.push(color);
       if (max == datapoint) {
         copydatapoints.splice(index, 1, 0);
@@ -107,7 +107,7 @@ const get_report = () => {
     states.avg_min = min.toFixed(1);
     const lowerValueColor = copydatapoints.map((datapoint, index) => {
       if (min == datapoint) {
-        bgc.splice(index, 1, "#C7E9B0");
+        bgc.splice(index, 1, "#0086C9");
       }
     });
 
@@ -240,10 +240,10 @@ const contact =()=> {
           </div>
           <div>
             <div class="relative text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap text-respon">
-              <div class="absolute top-1 right-28 bg-[#154293] w-[30px] h-[10px]"></div> 
+              <div class="absolute top-1 right-28 bg-[#074E9F] w-[30px] h-[10px]"></div> 
               ค่าสูงสุด : {{ states.avg_max }} °C</div>
             <div class="relative text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap text-respon">
-              <div class="absolute top-1 right-28 bg-[#C7E9B0] w-[30px] h-[10px]"></div> 
+              <div class="absolute top-1 right-28 bg-[#0086C9] w-[30px] h-[10px]"></div> 
               ค่าต่ำสุด : {{ states.avg_min }} °C</div>
           </div>
         </div>
