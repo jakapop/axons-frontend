@@ -217,7 +217,7 @@ const contact =()=> {
     </div>
   </div>
   <div id="chart">
-    <div class="rounded-2xl bg-white p-2 h-full">
+    <div class="rounded-2xl bg-white p-2 h-full overflow-hidden">
       <div class="flex flex-row items-center justify-between">
         <div class="flex flex-row items-center w-[117px]">
           <img src="@/assets/img/icons/sensor/1.png" class="inline mr-1" style="width: 24px; height: 24px" />
@@ -233,18 +233,29 @@ const contact =()=> {
         </div>
       </div>
       <div class="w-full mt-4">
-        <div class="flex flex-row justify-between mx-2">
-          <div>
-            <h5 class="w-custom text-xs md:text-sm lg:text-sm font-medium text-respon truncate">ข้อมูล : <span class="text-[#01893D]">เดือน {{ month }} พ.ศ. {{ year }}</span></h5>
-            <h5 class="text-xs md:text-sm lg:text-sm font-medium text-respon">ค่าเฉลี่ย : {{ states.avg_all }} °C</h5>
+        <div class="flex flex-row  justify-between">
+          <div >
+            <div>
+              <h5 class="text-sm font-medium  text-respon truncate lg:w-full">เดือน {{ month }} พ.ศ.{{ year }}</h5>
+              <p class="text-xs md:text-sm lg:text-sm font-medium text-respon">ค่าเฉลี่ย : {{ states.avg_all }} °C</p>
+            </div>
+            <!-- <h5 class="w-custom text-xs md:text-sm lg:text-sm font-medium text-respon truncate">ข้อมูล : <span class="text-[#01893D]">เดือน {{ month }} พ.ศ. {{ year }}</span></h5>
+            <h5 class="text-xs md:text-sm lg:text-sm font-medium text-respon">ค่าเฉลี่ย : {{ states.avg_all }} °C</h5> -->
           </div>
-          <div>
-            <div class="relative text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap text-respon">
-              <div class="absolute top-1 right-28 bg-[#074E9F] w-[30px] h-[10px]"></div> 
-              ค่าสูงสุด : {{ states.avg_max }} °C</div>
-            <div class="relative text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap text-respon">
-              <div class="absolute top-1 right-28 bg-[#0086C9] w-[30px] h-[10px]"></div> 
-              ค่าต่ำสุด : {{ states.avg_min }} °C</div>
+          <div >
+            <div class="flex flex-row items-center">
+              <div class="flex items-center gap-1 text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap ">
+                <div class="bg-[#074E9F] w-[10px] lg:w-[20px] h-[10px]"></div>
+                <p class="text-xs md:text-sm lg:text-sm font-medium text-respon truncate">ค่าสูงสุด: {{ states.avg_max }}°C</p>
+              </div>
+              
+            </div>
+            <div class="flex flex-row items-center">
+              <div class="flex items-center gap-1 text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap ">
+                <div class="bg-[#0086C9] w-[10px] lg:w-[20px] h-[10px]"></div>
+                <p class="text-xs md:text-sm lg:text-sm font-medium text-respon">ค่าต่ำสุด: {{ states.avg_min }}°C</p>
+              </div>
+            </div>
           </div>
         </div>
         <p class="text-xs md:text-base ml-2 font-bold mt-4">อุณหภูมิ ( °C )</p>

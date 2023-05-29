@@ -2,7 +2,7 @@
   <NavbarMain>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 m-4 gap-2 ">
       <div>
-        <div class="mt-8 md:mt-0 mb-4">
+        <div class="mt-8 md:mt-0 ">
           <CardFarm/>
         </div>
         <div class="mb-4">
