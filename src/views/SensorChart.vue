@@ -426,10 +426,54 @@ const check_pH = (pH) => {
             </div>
             <div id="tab-contents">
               <div id="hour">
-                <div class="grid grid-cols-3 gap-2 pt-2 px-2 md:px-8 ">
+                <div class="flex flex-row px-2 md:px-8 mt-2">
+                  <div class="w-3/5">
+                    <p class="text-xs md:text-lg font-medium w-cus">ข้อมูล : <span class="text-[#01893D]">วันที่ {{ daynow }} เดือน {{ monthnow }} พ.ศ.{{ yearnow }}</span> </p>
+                    <p class="text-xs md:text-lg font-medium">
+                      ค่าเฉลี่ย : {{ state.avg_all }}
+                      <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                      <span v-else-if="state.sensor_name_th =='ทิศทางลม'">{{ state.sensor_unit_en }} {{ getDirection(state.avg_all) }} </span>
+                      <span v-else-if="state.sensor_name_th =='pH ในดิน'"  > ( {{ check_pH(state.avg_all) }} ) </span>
+                      <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                      <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                      <span v-else>{{ state.sensor_unit_en  }} </span>
+                    </p>
+                  </div>
+                  <div class="w-2/5 flex flex-row justify-end">
+                    <div >
+                      <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#074E9F] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าสูงสุด : {{ state.avg_max }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}{{ getDirection(state.avg_max) }} </span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      <div>
+                        <div class="flex flex-row items-center gap-1 md:gap-2">
+                        <div class="bg-[#0086C9] w-[30px] h-[10px] md:h-[16px]"></div> 
+                        <p class="w-full truncate text-xs sm:text-sm md:text-md lg:text-lg font-medium">ค่าต่ำสุด : {{ state.avg_min }}
+                          <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
+                          <span v-else-if="state.sensor_name_th =='ทิศทางลม'" >{{ state.sensor_unit_en }}</span>
+                          <span v-else-if="state.sensor_name_th =='pH ในดิน'"  ></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/cm2'">μW/<span>cm<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μW/m2'">μW/<span>m<sup>2</sup></span></span>
+                          <span v-else-if="state.sensor_unit_en  == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                          <span v-else>{{ state.sensor_unit_en  }} </span>
+                        </p>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="grid grid-cols-3 gap-0 pt-2 px-2 md:px-8 ">
                   <div class="col-span-2 text-xs md:text-lg font-medium my-auto">
-                    <p>ข้อมูล : <span class="text-[#01893D]">วันที่ {{ daynow }} เดือน {{ monthnow }} พ.ศ.
-                        {{ yearnow }}</span> </p>
+                    <p>ข้อมูล : <span class="text-[#01893D]">วันที่ {{ daynow }} เดือน {{ monthnow }} พ.ศ.{{ yearnow }}</span> </p>
                     <p>
                       ค่าเฉลี่ย : {{ state.avg_all }}
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
@@ -472,7 +516,7 @@ const check_pH = (pH) => {
                     </div>
                   </div>
                   
-                </div>
+                </div> -->
                 <p class="text-xs md:text-lg font-medium pt-2 px-2 md:px-8 mt-4">
                   <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5'">{{ state.sensor_unit_th }} ( µg /<span>m<sup>3</sup></span> )</span>
                       <span v-else-if="state.sensor_name_th =='pH ในดิน'" >ความเป็นกรดด่าง (pH)</span>
@@ -491,7 +535,7 @@ const check_pH = (pH) => {
               <div id="day" class="hidden">
                 <div class="grid grid-cols-3 gap-2 pt-2 px-2 md:px-8">
                   <div class="col-span-2 text-xs md:text-lg font-medium my-auto">
-                    <p>ข้อมูล : <span class="text-[#01893D]">เดือน {{ monthnow }} พ.ศ. {{ yearnow }}</span> </p>
+                    <p>ข้อมูล :<span class="text-[#01893D] w-cus2">เดือน{{ monthnow }} พ.ศ.{{ yearnow }}</span> </p>
                     <p>
                       ค่าเฉลี่ย : {{ state.avg_all }}
                       <span v-if="state.sensor_name_th=='ฝุ่น PM 2.5' && state.sensor_unit_en == 'µg/m3'">µg /<span>m<sup>3</sup></span></span>
@@ -712,5 +756,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .active {
   background-color: #01893D;
   color: white;
+}
+
+@media screen and (max-width: 340px) {
+  .w-cus { 
+    padding-right: 13px;
+  }
+  .w-cus2 { 
+    padding-right: 15px;
+  }
+  
 }
 </style>
