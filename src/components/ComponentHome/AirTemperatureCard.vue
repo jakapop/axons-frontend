@@ -65,7 +65,7 @@ const get_report = () => {
   ).then((response) => {
     const report_data = response.data.data;
 
-    // console.log(response.data.data,report_data.length)
+    console.log(response.data.data)
     if (report_data.length == 0) {
       let chart = document.querySelector("#chart");
       chart.classList.add("hidden");
@@ -80,11 +80,26 @@ const get_report = () => {
     let datapoints = [];
     let data_avg = [];
 
-    Object.entries(report_data).forEach(([key, val]) => {
-      labels.push(val.day);
-      datapoints.push(val.avg);
-      data_avg.push(val.avg);
-    });
+      const currentMonth = moment().month(); 
+      // จำนวนวันที่อยู่ในเดือน
+      const numberOfDays = moment().month(currentMonth).daysInMonth();
+      for (let i = 1; i <= numberOfDays; i++) {
+        let chart_data = report_data.filter(item=>item.day==i) ;
+        console.log('ค่าที่ตรงกับวันที่ : '+i,chart_data[0]);
+
+        if(chart_data[0] != undefined){
+          datapoints.push(chart_data[0].avg);
+          data_avg.push(chart_data[0].avg);
+        }else{
+          datapoints.push('0');
+          data_avg.push('0');
+        }
+        labels.push(i);
+      }
+
+    // Object.entries(report_data).forEach(([key, val]) => {
+   
+    // });
 
     const bgc = [];
     const copydatapoints = [...datapoints];
@@ -188,18 +203,18 @@ const contact =()=> {
   <div v-if="states.serial">
     <div class="bg-white rounded-2xl p-2 my-4">
     <div class="flex flex-col">
-      <div class="flex flex-row items-center justify-between">
-        <div class="flex flex-row items-center w-[117px]">
+      <div class="flex flex-row items-center">
+        <div class="w-full">
+          <div class="flex flex-row items-center w-1/2">
           <img src="@/assets/img/icons/sensor/1.png" class="inline mr-1" style="width: 24px; height: 24px" />
           <h1 class="font-bold text-xs md:text-sm xl:text-base whitespace-nowrap text-custom-size">อุณหภูมิในอากาศ</h1>
         </div>
-        <div>
-          <div class="width-truncate"> <!--class="w-[103px]"-->
-            <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
+        </div>
+        <div class="w-[30%] 2xl:w-[40%] flex justify-end">
+          <span class="text-respon font-medium text-xs md:text-sm truncate text-custom-size">บอร์ด
               <span v-if="states.board_name">{{ states.board_name }}</span>
               <span v-else>{{ states.serial }}</span>
             </span>
-          </div>
         </div>
       </div>
       <div>
@@ -223,7 +238,7 @@ const contact =()=> {
           <img src="@/assets/img/icons/sensor/1.png" class="inline mr-1" style="width: 24px; height: 24px" />
           <h1 class="font-bold text-xs md:text-sm xl:text-base whitespace-nowrap text-custom-size">อุณหภูมิในอากาศ</h1>
         </div>
-        <div>
+        <div >
           <div class="width-truncate">
             <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
               <span v-if="states.board_name">{{ states.board_name }}</span>

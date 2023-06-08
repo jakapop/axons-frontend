@@ -413,7 +413,7 @@ const checkWeatherNow = (forecasts) => {
                         ? Math.floor(
                             states.weatherForecast.forecasts[0].data.tc_max
                           )
-                        : ""
+                        : "-"
                     }}
                     °</span
                   >&nbsp;&nbsp;/&nbsp;&nbsp;ต่ำสุด&nbsp;<span
