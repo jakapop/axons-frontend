@@ -65,7 +65,7 @@ const get_report = () => {
   ).then((response) => {
     const report_data = response.data.data;
 
-    console.log(response.data.data)
+    // console.log(response.data.data)
     if (report_data.length == 0) {
       let chart = document.querySelector("#chart");
       chart.classList.add("hidden");
@@ -85,7 +85,7 @@ const get_report = () => {
       const numberOfDays = moment().month(currentMonth).daysInMonth();
       for (let i = 1; i <= numberOfDays; i++) {
         let chart_data = report_data.filter(item=>item.day==i) ;
-        console.log('ค่าที่ตรงกับวันที่ : '+i,chart_data[0]);
+        // console.log('ค่าที่ตรงกับวันที่ : '+i,chart_data[0]);
 
         if(chart_data[0] != undefined){
           datapoints.push(chart_data[0].avg);
@@ -210,7 +210,7 @@ const contact =()=> {
           <h1 class="font-bold text-xs md:text-sm xl:text-base whitespace-nowrap text-custom-size">อุณหภูมิในอากาศ</h1>
         </div>
         </div>
-        <div class="w-[30%] 2xl:w-[40%] flex justify-end">
+        <div class="w-[30%] 2xl:w-[50%] flex justify-end">
           <span class="text-respon font-medium text-xs md:text-sm truncate text-custom-size">บอร์ด
               <span v-if="states.board_name">{{ states.board_name }}</span>
               <span v-else>{{ states.serial }}</span>

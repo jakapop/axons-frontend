@@ -159,7 +159,7 @@ onMounted(() => {
     });
     state.notiToday = filteredData ;
 
-    // console.log(state.notiToday);
+    console.log(state.notiToday);
 
   })
 
@@ -353,19 +353,29 @@ const handleClick = (event) => {
 
 };
 
-const substring_boardname = (message) =>{
-  const boardIndex = message.indexOf('บอร์ด')
-      if (boardIndex !== -1) {
-        const boardString = message.substr(boardIndex)
-        let boardName = boardString.split(' ')[1]
-        if(message.includes('กลับสู่สถานะออนไลน์') == true){
-          return  boardName.replace('กลับสู่สถานะออนไลน์','');
-        }
-        else{
-          return boardName
-        }
-      }
-};
+
+const substring_BoardName =(message_board)=>{
+
+  const board_name = message_board.match(/ที่บอร์ด(.+?)(กรุณา|เรียบ|กลับ)/);
+  if (board_name) {
+        const extractedMatchBoardName = board_name[1].trim();
+        return extractedMatchBoardName
+    }
+}
+
+// const substring_boardname = (message) =>{
+//   const boardIndex = message.indexOf('บอร์ด')
+//       if (boardIndex !== -1) {
+//         const boardString = message.substr(boardIndex)
+//         let boardName = boardString.split(' ')[1]
+//         if(message.includes('กลับสู่สถานะออนไลน์') == true){
+//           return  boardName.replace('กลับสู่สถานะออนไลน์','');
+//         }
+//         else{
+//           return boardName
+//         }
+//       }
+// };
 
 </script>
 
@@ -488,7 +498,7 @@ const substring_boardname = (message) =>{
                               <span v-if="noti.notiStatus == '4'">{{  noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/,"").replace(/บอร์ด.*[A-Za-z0-9]/g,"").replace("ค่ะ","") }}</span>
                               <span v-else>{{  noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/,"").replace(/ที่บอร์ด.*[A-Za-z0-9]/g,"").replace("ค่ะ","") }}</span>
                             </p>
-                            <p class="text-black text-sm font-medium truncate w-[200px]" >บอร์ด {{ substring_boardname(noti.message) }}</p>
+                            <p class="text-black text-sm font-medium truncate w-[200px]" >บอร์ด {{ substring_BoardName(noti.message) }}</p>
                             <!-- <p class="text-black text-sm font-medium truncate w-[200px]" >บอร์ด {{ noti.message.match(/บอร์ด\s+(\w+)/)[1] }}</p> -->
                             <!-- <p class="text-black text-sm font-medium truncate w-[200px]" >บอร์ด {{ noti.serialNumber }}</p> -->
                           </div>
