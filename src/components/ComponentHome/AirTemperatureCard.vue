@@ -212,7 +212,7 @@ const contact =()=> {
         </div>
         <div class="w-[30%] 2xl:w-[50%] flex justify-end">
           <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
-              <span v-if="states.board_name">{{ states.board_name }} asmdlkasmdlkamsdlkmaslkmaslkmlsakdmlkasdmlkasd</span>
+              <span v-if="states.board_name">{{ states.board_name }}</span>
               <span v-else>{{ states.serial }}</span>
             </span>
         </div>
@@ -243,7 +243,7 @@ const contact =()=> {
         </div>
         <div class="w-[30%] 2xl:w-[50%] flex justify-end">
           <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
-              <span v-if="states.board_name">{{ states.board_name }} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia, fuga.</span>
+              <span v-if="states.board_name">{{ states.board_name }}</span>
               <span v-else>{{ states.serial }}</span>
             </span>
         </div>
