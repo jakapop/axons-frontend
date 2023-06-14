@@ -205,14 +205,14 @@ const contact =()=> {
     <div class="flex flex-col">
       <div class="flex flex-row items-center">
         <div class="w-full">
-          <div class="flex flex-row items-center w-1/2">
+          <div class="flex flex-row items-center w-[117px]">
           <img src="@/assets/img/icons/sensor/1.png" class="inline mr-1" style="width: 24px; height: 24px" />
           <h1 class="font-bold text-xs md:text-sm xl:text-base whitespace-nowrap text-custom-size">อุณหภูมิในอากาศ</h1>
         </div>
         </div>
         <div class="w-[30%] 2xl:w-[50%] flex justify-end">
-          <span class="text-respon font-medium text-xs md:text-sm truncate text-custom-size">บอร์ด
-              <span v-if="states.board_name">{{ states.board_name }}</span>
+          <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
+              <span v-if="states.board_name">{{ states.board_name }} asmdlkasmdlkamsdlkmaslkmaslkmlsakdmlkasdmlkasd</span>
               <span v-else>{{ states.serial }}</span>
             </span>
         </div>
@@ -223,7 +223,7 @@ const contact =()=> {
       </div>
       <div class="mt-2">
         <router-link :to="`/SensorChart?board=${states.serial}&sid=1`">
-          <button type="button" class="text-white w-full hover:text-[#01893D] bg-[#01893D] hover:bg-[#fff] font-bold rounded-[8px] text-sm px-4 h-[40px] text-center items-center btn-custom">
+          <button type="button" class="text-white w-full hover:text-[#298906] bg-[#298906] hover:bg-[#fff] font-bold rounded-[8px] text-sm px-4 h-[40px] text-center items-center btn-custom">
               <img alt="" class="inline chart lg:mt-0 bg-[#fff] mr-1" style="width: 20px; height: 20px" />
               <span>กราฟ</span>
           </button>
@@ -231,20 +231,21 @@ const contact =()=> {
       </div>
     </div>
   </div>
+    
   <div id="chart">
     <div class="rounded-2xl bg-white p-2 h-full overflow-hidden">
-      <div class="flex flex-row items-center justify-between">
-        <div class="flex flex-row items-center w-[117px]">
+      <div class="flex flex-row items-center">
+        <div class="w-full">
+          <div class="flex flex-row items-center w-[117px]">
           <img src="@/assets/img/icons/sensor/1.png" class="inline mr-1" style="width: 24px; height: 24px" />
           <h1 class="font-bold text-xs md:text-sm xl:text-base whitespace-nowrap text-custom-size">อุณหภูมิในอากาศ</h1>
         </div>
-        <div >
-          <div class="width-truncate">
-            <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
-              <span v-if="states.board_name">{{ states.board_name }}</span>
+        </div>
+        <div class="w-[30%] 2xl:w-[50%] flex justify-end">
+          <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
+              <span v-if="states.board_name">{{ states.board_name }} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia, fuga.</span>
               <span v-else>{{ states.serial }}</span>
             </span>
-          </div>
         </div>
       </div>
       <div class="w-full mt-4">
