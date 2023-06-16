@@ -65,7 +65,7 @@ const get_report = () => {
   ).then((response) => {
     const report_data = response.data.data;
 
-    // console.log(response.data.data,report_data.length)
+    // console.log(response.data.data)
     if (report_data.length == 0) {
       let chart = document.querySelector("#chart");
       chart.classList.add("hidden");
@@ -80,11 +80,26 @@ const get_report = () => {
     let datapoints = [];
     let data_avg = [];
 
-    Object.entries(report_data).forEach(([key, val]) => {
-      labels.push(val.day);
-      datapoints.push(val.avg);
-      data_avg.push(val.avg);
-    });
+      const currentMonth = moment().month(); 
+      // จำนวนวันที่อยู่ในเดือน
+      const numberOfDays = moment().month(currentMonth).daysInMonth();
+      for (let i = 1; i <= numberOfDays; i++) {
+        let chart_data = report_data.filter(item=>item.day==i) ;
+        // console.log('ค่าที่ตรงกับวันที่ : '+i,chart_data[0]);
+
+        if(chart_data[0] != undefined){
+          datapoints.push(chart_data[0].avg);
+          data_avg.push(chart_data[0].avg);
+        }else{
+          datapoints.push('0');
+          data_avg.push('0');
+        }
+        labels.push(i);
+      }
+
+    // Object.entries(report_data).forEach(([key, val]) => {
+   
+    // });
 
     const bgc = [];
     const copydatapoints = [...datapoints];
@@ -96,7 +111,7 @@ const get_report = () => {
     states.avg_max = max.toFixed(1);
     const highestValueColor = datapoints.map((datapoint, index) => {
       const color =
-        datapoint == max ? "#154293" : "rgba(41, 137, 6, 1)";
+        datapoint == max ? "#074E9F" : "#01893D";
       bgc.push(color);
       if (max == datapoint) {
         copydatapoints.splice(index, 1, 0);
@@ -107,7 +122,7 @@ const get_report = () => {
     states.avg_min = min.toFixed(1);
     const lowerValueColor = copydatapoints.map((datapoint, index) => {
       if (min == datapoint) {
-        bgc.splice(index, 1, "#154293");
+        bgc.splice(index, 1, "#0086C9");
       }
     });
 
@@ -188,18 +203,18 @@ const contact =()=> {
   <div v-if="states.serial">
     <div class="bg-white rounded-2xl p-2 my-4">
     <div class="flex flex-col">
-      <div class="flex flex-row items-center justify-between">
-        <div class="flex flex-row items-center w-[117px]">
+      <div class="flex flex-row items-center">
+        <div class="w-full">
+          <div class="flex flex-row items-center w-[117px]">
           <img src="@/assets/img/icons/sensor/1.png" class="inline mr-1" style="width: 24px; height: 24px" />
           <h1 class="font-bold text-xs md:text-sm xl:text-base whitespace-nowrap text-custom-size">อุณหภูมิในอากาศ</h1>
         </div>
-        <div>
-          <div class="width-truncate"> <!--class="w-[103px]"-->
-            <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
+        </div>
+        <div class="w-[30%] 2xl:w-[50%] flex justify-end">
+          <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
               <span v-if="states.board_name">{{ states.board_name }}</span>
               <span v-else>{{ states.serial }}</span>
             </span>
-          </div>
         </div>
       </div>
       <div>
@@ -208,7 +223,7 @@ const contact =()=> {
       </div>
       <div class="mt-2">
         <router-link :to="`/SensorChart?board=${states.serial}&sid=1`">
-          <button type="button" class="text-white w-full hover:text-[#01893D] bg-[#01893D] hover:bg-[#fff] font-bold rounded-[8px] text-sm px-4 h-[40px] text-center items-center btn-custom">
+          <button type="button" class="text-white w-full hover:text-[#298906] bg-[#298906] hover:bg-[#fff] font-bold rounded-[8px] text-sm px-4 h-[40px] text-center items-center btn-custom">
               <img alt="" class="inline chart lg:mt-0 bg-[#fff] mr-1" style="width: 20px; height: 20px" />
               <span>กราฟ</span>
           </button>
@@ -216,31 +231,47 @@ const contact =()=> {
       </div>
     </div>
   </div>
+    
   <div id="chart">
-    <div class="rounded-2xl bg-white p-2 h-full">
-      <div class="flex flex-row items-center justify-between">
-        <div class="flex flex-row items-center w-[117px]">
+    <div class="rounded-2xl bg-white p-2 h-full overflow-hidden">
+      <div class="flex flex-row items-center">
+        <div class="w-full">
+          <div class="flex flex-row items-center w-[117px]">
           <img src="@/assets/img/icons/sensor/1.png" class="inline mr-1" style="width: 24px; height: 24px" />
           <h1 class="font-bold text-xs md:text-sm xl:text-base whitespace-nowrap text-custom-size">อุณหภูมิในอากาศ</h1>
         </div>
-        <div>
-          <div class="width-truncate">
-            <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
+        </div>
+        <div class="w-[30%] 2xl:w-[50%] flex justify-end">
+          <span class="font-medium text-xs md:text-sm truncate block text-custom-size">บอร์ด
               <span v-if="states.board_name">{{ states.board_name }}</span>
               <span v-else>{{ states.serial }}</span>
             </span>
-          </div>
         </div>
       </div>
       <div class="w-full mt-4">
-        <div class="flex flex-row justify-between mx-2">
-          <div>
-            <h5 class="w-custom text-xs md:text-sm lg:text-sm font-medium text-respon truncate">ข้อมูล : <span class="text-[#01893D]">เดือน {{ month }} พ.ศ. {{ year }}</span></h5>
-            <h5 class="text-xs md:text-sm lg:text-sm font-medium text-respon">ค่าเฉลี่ย : {{ states.avg_all }} °C</h5>
+        <div class="flex flex-row  justify-between">
+          <div >
+            <div>
+              <h5 class="text-sm font-medium  text-respon truncate lg:w-full">เดือน {{ month }} พ.ศ.{{ year }}</h5>
+              <p class="text-xs md:text-sm lg:text-sm font-medium text-respon">ค่าเฉลี่ย : {{ states.avg_all }} °C</p>
+            </div>
+            <!-- <h5 class="w-custom text-xs md:text-sm lg:text-sm font-medium text-respon truncate">ข้อมูล : <span class="text-[#01893D]">เดือน {{ month }} พ.ศ. {{ year }}</span></h5>
+            <h5 class="text-xs md:text-sm lg:text-sm font-medium text-respon">ค่าเฉลี่ย : {{ states.avg_all }} °C</h5> -->
           </div>
-          <div>
-            <p class="text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap text-respon">ค่าสูงสุด : {{ states.avg_max }} °C</p>
-            <p class="text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap text-respon">ค่าต่ำสุด : {{ states.avg_min }} °C</p>
+          <div >
+            <div class="flex flex-row items-center">
+              <div class="flex items-center gap-1 text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap ">
+                <div class="bg-[#074E9F] w-[10px] lg:w-[20px] h-[10px]"></div>
+                <p class="text-xs md:text-sm lg:text-sm font-medium text-respon truncate">ค่าสูงสุด: {{ states.avg_max }}°C</p>
+              </div>
+              
+            </div>
+            <div class="flex flex-row items-center">
+              <div class="flex items-center gap-1 text-xs md:text-sm lg:text-sm font-medium whitespace-nowrap ">
+                <div class="bg-[#0086C9] w-[10px] lg:w-[20px] h-[10px]"></div>
+                <p class="text-xs md:text-sm lg:text-sm font-medium text-respon">ค่าต่ำสุด: {{ states.avg_min }}°C</p>
+              </div>
+            </div>
           </div>
         </div>
         <p class="text-xs md:text-base ml-2 font-bold mt-4">อุณหภูมิ ( °C )</p>

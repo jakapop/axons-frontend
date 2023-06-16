@@ -58,15 +58,15 @@ onMounted(()=>{
         <div class="flex flex-col justify-self-start md:justify-self-center">
           <div class="flex flex-row items-center mb-4 md:mb-6">
             <img src="@/assets/img/OtherPage/location_on.png" alt="" class="mr-2 w-[20px]">
-            <span class="font-mediem text-base md:text-xl">จังหวัด <span class="text-[#01893D]">{{provice_name}}</span></span>
+            <span class="font-mediem text-base md:text-x whitespace-nowrap">จังหวัด <span class="text-[#01893D]">{{provice_name}}</span></span>
           </div>
           <div class="flex flex-row items-center mb-4  md:mb-6">
             <img src="@/assets/img/OtherPage/mail.png" alt="" class="mr-2 w-[20px]">
-            <span class="font-mediem text-base md:text-xl">อีเมล <span class="text-[#01893D]">{{CustomerEmail}}</span></span>
+            <span class="font-mediem text-base md:text-xl whitespace-nowrap">อีเมล <span class="text-[#01893D]">{{CustomerEmail}}</span></span>
           </div>
           <div class="flex flex-row items-center mb-4  md:mb-6">
             <img src="@/assets/img/OtherPage/call.png" alt="" class="mr-2 w-[20px]">
-            <span class="font-mediem text-base md:text-xl">เบอร์โทรศัพท์ <span class="text-[#01893D]">{{userName}}</span></span>
+            <span class="font-mediem text-base md:text-xl whitespace-nowrap">เบอร์โทรศัพท์ <span class="text-[#01893D]">{{userName}}</span></span>
           </div>
         </div>
         <router-link to="/edit-personal" class="flex items-center justify-center my-4 bg-[#01893D] py-0.5 px-2 md:py-3 md:px-10 w-[256px] h-[36px] md:w-[300px] md:h-[50px] rounded-lg">

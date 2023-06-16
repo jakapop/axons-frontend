@@ -205,7 +205,7 @@ const toggle = () => {
                           {{ destination_addresses }}
                         </div>
                         <div class="font-medium text-sm ml-1 md:ml-[12px] mt-2">
-                          ห่างจากคุณ <span class="text-[#74b55c]">{{ distance_km }}  ( {{ duration }} )</span>
+                          ห่างจากคุณ <span class="text-[#01893D]">{{ distance_km }}  ( {{ duration }} )</span>
                         </div>
                       </div>
                       <div class="flex p-2">

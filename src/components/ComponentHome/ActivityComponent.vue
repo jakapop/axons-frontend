@@ -99,7 +99,7 @@ onMounted(async () => {
     ApiCore.get("/v2/projects/?limit=all").then((response) => {
 
       obj_farmlist = response.data.data;
-      console.log('farm name list == ', obj_farmlist);
+      // console.log('farm name list == ', obj_farmlist);
 
       let result = states.days.map((obj1) => {
         let activityArr = obj1.activity_data.map((act) => {
@@ -122,7 +122,7 @@ onMounted(async () => {
     console.error('Error fetching resources:', error);
   });
 
-  console.log(' 7 days == ', states.days);
+  // console.log(' 7 days == ', states.days);
   // states.activities_today = states.days[0].activity_data;
 });
 

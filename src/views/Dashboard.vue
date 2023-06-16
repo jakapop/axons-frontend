@@ -41,7 +41,7 @@ onMounted(() => {
   //2309SWCSTXJ47BC
   ApiCore.get("/v2/boards/" + boards + "/sensor").then((response) => {
     state.boards = response.data.data.sensors;
-    //console.log(state.boards);
+    console.log('sensor boards == ', state.boards);
     //Object.keys(state.boards).forEach(function (key) {
     // console.log(state.boards[key].items_id);
     //state.boards[key]["icon"] = getImageUrl(state.boards[key].id)
@@ -58,6 +58,76 @@ onMounted(() => {
     //console.log(state.group);
   });
 });
+
+
+const getDirection = (degrees) => {
+  console.log('value == ' + degrees, typeof (degrees));
+  if (degrees >= 337.5 || degrees < 22.5) {
+    return "ทิศเหนือ";
+  } else if (degrees >= 22.5 && degrees < 67.5) {
+    return "ภาคตะวันออกเฉียงเหนือ";
+  } else if (degrees >= 67.5 && degrees < 112.5) {
+    return "ทิศตะวันออก";
+  } else if (degrees >= 112.5 && degrees < 157.5) {
+    return "ทิศตะวันออกเฉียงใต้";
+  } else if (degrees >= 157.5 && degrees < 202.5) {
+    return "ทิศใต้";
+  } else if (degrees >= 202.5 && degrees < 247.5) {
+    return "ทิศตะวันตกเฉียงใต้";
+  } else if (degrees >= 247.5 && degrees < 292.5) {
+    return "ทิศตะวันตก";
+  } else if (degrees >= 292.5 && degrees < 337.5) {
+    return " ทิศตะวันตกเฉียงเหนือ";
+  } else {
+    return "Invalid degrees";
+  }
+
+};
+
+const rainfall = (rainfallVolume) => {
+
+  if (rainfallVolume >= 0.1 && rainfallVolume <= 10) {
+    return "ฝนตกเล็กน้อย";
+  } else if (rainfallVolume > 10 && rainfallVolume <= 35) {
+    return "ฝนตกปานกลาง";
+  } else if (rainfallVolume > 35 && rainfallVolume <= 90) {
+    return "ฝนตกหนัก";
+  } else if (rainfallVolume > 90) {
+    return "ฝนตกหนักมาก";
+  } else {
+    return "ไม่มีฝนตก";
+  }
+};
+
+
+const check_pH = (pH) => {
+  
+  if (pH < 3.5) {
+    return 'กรดรุนแรงที่สุด';
+  } else if (pH >= 3.5 && pH <= 4.5) {
+    return 'กรดรุนแรงมาก';
+  } else if (pH >= 4.6 && pH <= 5.0) {
+    return 'กรดจัดมาก';
+  } else if (pH >= 5.1 && pH <= 5.5) {
+    return 'กรดจัด';
+  } else if (pH >= 5.6 && pH <= 6.0) {
+    return 'กรดปานกลาง';
+  } else if (pH >= 6.1 && pH <= 6.5) {
+    return 'กรดเล็กน้อย';
+  } else if (pH >= 6.6 && pH <= 7.3) {
+    return 'เป็นกลาง';
+  } else if (pH >= 7.4 && pH <= 7.8) {
+    return 'ด่างเล็กน้อย';
+  } else if (pH >= 7.9 && pH <= 8.4) {
+    return 'ด่างปานกลาง';
+  } else if (pH >= 8.5 && pH <= 9.0) {
+    return 'ด่างจัด';
+  } else if (pH > 9.0) {
+    return 'ด่างจัดมาก';
+  } else {
+    return '';
+  }
+};
 </script>
 <template>
   <NavbarMain>
@@ -80,28 +150,28 @@ onMounted(() => {
           </div>
         </div>
         <div v-for="(groupType, index) in state.group" :key="index" class="mt-3">
-          <p v-if="groupType == '1'" class="text-2xl font-bold ">
+          <p v-if="groupType == '1'" class="text-2xl font-bold my-4">
             ข้อมูลดิน
           </p>
-          <p v-if="groupType == '2'" class="text-2xl font-bold">
+          <p v-if="groupType == '2'" class="text-2xl font-bold my-4">
             ข้อมูลน้ำ
           </p>
-          <p v-if="groupType == '3'" class="text-2xl font-bold ">
+          <p v-if="groupType == '3'" class="text-2xl font-bold my-4">
             ข้อมูลอากาศ
           </p>
-          <p v-if="groupType == '4'" class="text-2xl font-bold ">
+          <p v-if="groupType == '4'" class="text-2xl font-bold my-4">
             ข้อมูลแสง
           </p>
-          <p v-if="groupType == '5'" class="text-2xl font-bold ">
+          <p v-if="groupType == '5'" class="text-2xl font-bold my-4">
             ข้อมูลเสียง
           </p>
-          <p v-if="groupType == '6'" class="text-2xl font-bold ">
+          <p v-if="groupType == '6'" class="text-2xl font-bold my-4">
             ข้อมูลพลังงาน
           </p>
-          <p v-if="groupType == '7'" class="text-2xl font-bold ">
+          <p v-if="groupType == '7'" class="text-2xl font-bold my-4">
             ข้อมูลตำแหน่ง
           </p>
-          <p v-if="groupType == '8'" class="text-2xl font-bold ">
+          <p v-if="groupType == '8'" class="text-2xl font-bold my-4">
             อื่นๆ
           </p>
 
@@ -115,13 +185,27 @@ onMounted(() => {
                         :src="`img/sensor/${sensor.id}.png`" />
                       {{ sensor.name.th }}
                     </div>
-                    <p class="text-gray-700 text-base text-center text-[40px] my-6 md:text-[54px] xl:text-[64px]">
+                    <p
+                      class="py-1 md:py-4 text-gray-700 text-base text-center text-[30px] my-6 md:text-[54px] xl:text-[64px] truncate">
                       {{ sensor.result_sensor }}
                     </p>
                     <p class="text-gray-700 text-base text-center md:text-xl mt-3 mb-4">
-                      
-                      <span v-if="sensor.unit.th == 'องศาเซลเซียล'">องศาเซลเซียส</span>
-                      <span v-else>{{ sensor.unit.th }}</span>
+                      <span v-if="sensor.name.th == 'ทิศทางลม'">{{ sensor.unit.th }} / {{
+                        getDirection(sensor.result_sensor) }}</span>
+                        <span v-else-if="sensor.name.th == 'pH ในดิน'">{{ check_pH(sensor.result_sensor) }}</span>
+                      <span v-else-if="sensor.name.th != 'ฝุ่น PM 2.5'">
+                        <span v-if="sensor.unit.th == 'uW/cm2'">uW/<span>cm<sup>2</sup></span></span>
+                        <span v-else-if="sensor.unit.th == 'mW/m2'">uW/<span>m<sup>2</sup></span></span>
+                        <span v-else-if="sensor.unit.th == 'μmol/m2/s'">μmol/<span>m<sup>2</sup></span>/s</span>
+                        <span v-else>{{ sensor.unit.th }} </span>
+                      </span>
+                      <span v-else-if="sensor.name.th == 'ฝุ่น PM 2.5'">ไมโครกรัม/ลูกบาศก์เมตร</span>
+
+
+                      <span v-if="sensor.name.th == 'ฝุ่น PM 2.5' && sensor.unit.th == 'µg./m3'">µg
+                        /<span>m<sup>3</sup></span></span>
+                      <span v-if="sensor.name.th == 'ปริมาณนํ้าฝน'" class="block text-black">(
+                        {{ rainfall(sensor.result_sensor) }} )</span>
                     </p>
                   </div>
                   <div class="px-6 text-center">
