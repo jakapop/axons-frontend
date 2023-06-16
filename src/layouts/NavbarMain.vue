@@ -486,7 +486,7 @@ const substring_BoardName =(message_board)=>{
                               <span v-if="noti.notiStatusText" :class="noti.notiStatusText=='ปิด'?'bg-[#827C7B]':noti.notiStatusText=='เปิด'?'bg-[#01893D]':noti.notiStatusText=='ออนไลน์'?'bg-[#154293]':noti.notiStatusText=='ออฟไลน์' ?'bg-[#D22626]':'bg-[#827C7B]'" class="block w-full text-center py-1 px-4 rounded-full font-bold text-xs text-white mb-[6px] truncate ">{{ noti.notiStatusText }}</span>
                             </div>
                             <div class="flex flex-col">
-                              <span class="font-bold text-xs mb-[6px]">{{ moment(noti.createdAt).local("th").format("DD/MM/YYYY") }}</span>
+                              <span class="font-bold text-xs mb-[6px]">{{ moment.utc(noti.createdAt).format("DD/MM/YYYY") }}</span>
                               <!-- <span class="font-bold text-xs">{{  moment(noti.createdAt).lang("th").format("hh:mm") }} น.</span> -->
                               <span class="font-bold text-xs">{{ (noti.createdAt).slice(11, 16) }} น.</span>
                             </div>
