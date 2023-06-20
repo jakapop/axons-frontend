@@ -10,7 +10,12 @@ import { useMainStore } from "@/stores/main";
 
 const mainStore = useMainStore();
 const daynow = moment().locale('th').format('D');
-const monthnow = moment().locale('th').format('MMMM');
+// const monthnow = moment().locale('th').format('MM');
+
+const month = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+let date = new Date();
+const monthnow = month[date.getMonth()];
+
 const year = moment().locale('th').format('YYYY');
 const yearnow = parseInt(year) + 543;
 const url = new URL(window.location.href);
