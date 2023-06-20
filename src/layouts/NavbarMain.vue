@@ -159,7 +159,7 @@ onMounted(() => {
     });
     state.notiToday = filteredData ;
 
-    console.log(state.notiToday);
+    // console.log(state.notiToday);
 
   })
 
@@ -265,8 +265,8 @@ const get_customer_project = (CustomerId, projectId) => {
       const districtName = res.data.data.districtName;
       ApiMain.get(`/weather/temperature?provinceId=${provinceId}`).then(
         (res2) => {
-          console.log(res2);
-          console.log('temperature == ',Math.floor(res2.data.temperature));
+          // console.log(res2);
+          // console.log('temperature == ',Math.floor(res2.data.temperature));
 
           mainStore.setUser({
             farmlat: lat,

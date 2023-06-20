@@ -26,6 +26,7 @@
     "chartjs-plugin-zoom": "^1.2.1",
     "core-js": "^3.6.5",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "moment-with-locales-es6": "^1.0.1",
     "numeral": "^2.0.6",
     "pinia": "^2.0.13",
