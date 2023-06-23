@@ -96,19 +96,22 @@ const get_report = () => {
         }
         labels.push(i);
       }
-
-    // Object.entries(report_data).forEach(([key, val]) => {
-   
-    // });
+      
+      const filteredArray =  datapoints.filter(value => value !== '0') ;
+      let max = Math.max(...filteredArray);
+      let min = Math.min(...filteredArray);
 
     const bgc = [];
     const copydatapoints = [...datapoints];
-    const max = Math.max(...datapoints);
+    // const max = Math.max(...datapoints);
     let sum = data_avg.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
     let avg = sum / data_avg.length || 0;
 
     states.avg_all = Math.floor(avg);
     states.avg_max = max.toFixed(1);
+
+
+  
     const highestValueColor = datapoints.map((datapoint, index) => {
       const color =
         datapoint == max ? "#074E9F" : "#01893D";
@@ -118,13 +121,14 @@ const get_report = () => {
       }
     });
 
-    const min = Math.min(...datapoints);
+    // const min = Math.min(...datapoints);
     states.avg_min = min.toFixed(1);
     const lowerValueColor = copydatapoints.map((datapoint, index) => {
       if (min == datapoint) {
         bgc.splice(index, 1, "#0086C9");
       }
     });
+
 
     const data = {
       labels: labels,
@@ -223,7 +227,7 @@ const contact =()=> {
       </div>
       <div class="mt-2">
         <router-link :to="`/SensorChart?board=${states.serial}&sid=1`">
-          <button type="button" class="text-white w-full hover:text-[#298906] bg-[#298906] hover:bg-[#fff] font-bold rounded-[8px] text-sm px-4 h-[40px] text-center items-center btn-custom">
+          <button type="button" class="text-white w-full hover:text-[#01893D] bg-[#01893D] hover:bg-[#fff] font-bold rounded-[8px] text-sm px-4 h-[40px] text-center items-center btn-custom">
               <img alt="" class="inline chart lg:mt-0 bg-[#fff] mr-1" style="width: 20px; height: 20px" />
               <span>กราฟ</span>
           </button>

@@ -230,11 +230,12 @@ const get_report = (period) => {
         labels.push(val.year);
       }
     });
-    if(period == "report-day"){
+    if(period == "report-day" || period == "report-hour"){
       const filteredArray =  datapoints.filter(value => value !== '0') ;
       max = Math.max(...filteredArray);
       min = Math.min(...filteredArray);
-    }else { 
+    }
+    else { 
       
       if((max !=  -Infinity || max != Infinity) || (min !=  -Infinity || min != Infinity)  ){
         max = Math.max(...datapoints);
