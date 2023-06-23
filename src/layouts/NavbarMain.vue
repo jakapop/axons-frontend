@@ -341,18 +341,20 @@ let isMenuOpen = ref(false);
 
 const handleClick = (event) => {
 
-  localStorage.setItem('count_noti', state.notiCount);
+  
 
-  console.log('state.notiCount == ', state.notiCount);
-  console.log('state.notiToday.length == ', state.notiToday.length);
   oldCount.value = state.notiCount;
-  if (state.notiToday.length == 0) {
-    isMenuOpen.value = false;
-  } else {
-    console.log('toggle');
-    localStorage.setItem('old_count_noti', state.notiCount);
-    isMenuOpen.value = !isMenuOpen.value;
-  }
+
+  localStorage.setItem('old_count_noti', state.notiCount);
+  localStorage.setItem('count_noti', state.notiCount);
+  isMenuOpen.value = !isMenuOpen.value;
+  // if (state.notiToday.length == 0) {
+  //   isMenuOpen.value = false;
+  // } else {
+  //   console.log('toggle');
+  //   localStorage.setItem('old_count_noti', state.notiCount);
+  //   isMenuOpen.value = !isMenuOpen.value;
+  // }
 
 
 };
@@ -444,7 +446,7 @@ const substring_BoardName = (message_board) => {
                           class="inline-flex items-center text-red-500 text-[35px]">•</span>
                       </span>
                     </div>
-                    <transition v-if="state.notiToday.length > 0" enter-active-class="transition ease-out duration-100"
+                    <transition enter-active-class="transition ease-out duration-100"
                       enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
                       leave-active-class="transition ease-in duration-75"
                       leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
@@ -492,19 +494,14 @@ const substring_BoardName = (message_board) => {
                             <hr v-if="index + 1 != state.notiToday.length" class="line-custom mx-2">
                           </div>
                         </div>
-                      </div>
-                    </transition>
-                    <transition v-else enter-active-class="transition ease-out duration-100"
-                      enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
-                      leave-active-class="transition ease-in duration-75"
-                      leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                      <div v-if="isMenuOpen == true">
-                        <div v-if="state.notiToday.length > 0"
-                          class="flex justify-center items-center w-custom w-[350px] sm:w-[350px] md:w-[350px] h-[360px] origin-top-right absolute custom-right -right-4 sm:right-0 mt-5 overflow-auto border-[#01893D] border rounded-[8px] shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                        <div v-else>
+                          <div class="flex justify-center items-center w-custom w-[350px] sm:w-[350px] md:w-[350px] h-[360px] origin-top-right absolute custom-right -right-4 sm:right-0 mt-5 overflow-auto border-[#01893D] border rounded-[8px] shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                           <h1 class="text-sm text-gray-400">ยังไม่มีแจ้งเตือน</h1>
+                        </div>
                         </div>
                       </div>
                     </transition>
+                    
                   </Menu>
                 </div>
               </li>
