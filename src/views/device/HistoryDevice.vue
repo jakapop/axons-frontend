@@ -86,7 +86,8 @@ onMounted(()=>{
                     <span class="text-[#302421] font-medium text-sm md:text-base">{{ moment.utc(item_noti.createdAt).format("HH:mm") }}</span>
                   </div>
                   <div class="w-full ">
-                    <p class=" text-[#302421] font-medium text-sm md:text-base break-words w-cus w-full" >{{ item_noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/,"").replace(/ที่บอร์ด.*[A-Za-z0-9]/g,"").replace("ค่ะ","") }}</p>
+                    <p v-if="item_noti.notiStatus == '4'" class=" text-[#302421] font-medium text-sm md:text-base break-words w-cus w-full" >{{ item_noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/,"").replace(/บอร์ด.*[A-Za-z0-9]\s*\([^)]*\)\s*/g,"").replace("ค่ะ","") }}</p>
+                    <p v-else class=" text-[#302421] font-medium text-sm md:text-base break-words w-cus w-full" >{{ item_noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/,"").replace(/ที่บอร์ด.*[A-Za-z0-9]\s*\([^)]*\)\s*/g,"").replace("ค่ะ","") }}</p>
                   </div>
                   <div class="w-64">
                     <span :class="item_noti.notiStatus == '1' || item_noti.notiStatus == '4' || item_noti.notiStatus == '5' || item_noti.notiStatus == '9' ?'text-[#01893D]':item_noti.notiStatus == '2' ||item_noti.notiStatus == '3' ||  item_noti.notiStatus == '6' || item_noti.notiStatus == '10' || item_noti.notiStatus == '11'?'text-[#D22626]':'text-[#676c66]'" class=" font-medium text-sm md:text-base" >

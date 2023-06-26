@@ -154,7 +154,7 @@ onMounted(() => {
 
     const noti_obj = response.data.data;
 
-    console.log(response.data.data);
+    // console.log(response.data.data);
 
     const filteredData = Object.values(noti_obj).filter(item => {
       const date = new Date(item.createdAt);
@@ -163,7 +163,7 @@ onMounted(() => {
 
     state.notiToday = filteredData;
 
-    console.log('state.notiToday : ', state.notiToday);
+    // console.log('state.notiToday : ', state.notiToday);
 
   })
 
@@ -363,7 +363,6 @@ const handleClick = (event) => {
 
 const substring_BoardName = (message_board,status) => {
 
-
     const board_name = status==4? message_board.match(/บอร์ด(.+?)(กรุณา|เรียบ|กลับ)/):message_board.match(/ที่บอร์ด(.+?)(กรุณา|เรียบ|กลับ)/);
     if (board_name) {
       const extractedMatchBoardName = board_name[1].trim();
@@ -467,9 +466,9 @@ const substring_BoardName = (message_board,status) => {
                                 <p :class="noti.notiStatusText == 'ปิด' ? 'text-[#827C7B]' : noti.notiStatusText == 'เปิด' ? 'text-[#01893D]' : noti.notiStatusText == 'ออนไลน์' ? 'text-[#154293]' : noti.notiStatusText == 'ออฟไลน์' ? 'text-[#D22626]' : 'text-[#827C7B]'"
                                   class="text-xs font-bold mb-2 break-words w-[200px]">
                                   <!-- เช็คสถานะแล้วตัด string -->
-                                  <!-- <span class="test ">{{ noti.message }}</span> -->
-                                  <span v-if="noti.notiStatus == '4'">{{ noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/, "").replace(/บอร์ด.*[A-Za-z0-9]\(\)/g,"").replace("ค่ะ", "") }}</span>
-                                  <span v-else>{{ noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/,"").replace(/ที่บอร์ด.*[A-Za-z0-9]\(\)/g, "").replace("ค่ะ", "")}}</span>
+                                  
+                                  <span v-if="noti.notiStatus == '4'">{{ noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/, "").replace(/บอร์ด.*[A-Za-z0-9]\s*\([^)]*\)\s*/g,"").replace("ค่ะ", "") }}</span>
+                                  <span v-else>{{ noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/,"").replace(/ที่บอร์ด.*[A-Za-z0-9]\s*\([^)]*\)\s*/g, "").replace("ค่ะ", "")}}</span>
                                 </p>
                                 <p class="text-black text-sm font-medium truncate w-[200px]">บอร์ด {{ substring_BoardName(noti.message,noti.notiStatus) }}</p>
                                 <!-- <p class="text-black text-sm font-medium truncate w-[200px]" >บอร์ด {{ noti.message.match(/บอร์ด\s+(\w+)/)[1] }}</p> -->
