@@ -16,6 +16,7 @@ import { BellIcon, MenuIcon, XIcon } from "@heroicons/vue/outline";
 import moment from "moment-with-locales-es6";
 import farmimg from "@/assets/img/img_landingpage/bg-device.png";
 import userdefault from "@/assets/img/icons/user.png";
+import { not } from "@vuelidate/validators";
 
 const mainStore = useMainStore();
 const userFirstName = mainStore.userFirstName;
@@ -341,7 +342,7 @@ let isMenuOpen = ref(false);
 
 const handleClick = (event) => {
 
-  
+
 
   oldCount.value = state.notiCount;
 
@@ -360,28 +361,16 @@ const handleClick = (event) => {
 };
 
 
-const substring_BoardName = (message_board) => {
+const substring_BoardName = (message_board,status) => {
 
-  const board_name = message_board.match(/ที่บอร์ด(.+?)(กรุณา|เรียบ|กลับ)/);
-  if (board_name) {
-    const extractedMatchBoardName = board_name[1].trim();
-    return extractedMatchBoardName
-  }
+
+    const board_name = status==4? message_board.match(/บอร์ด(.+?)(กรุณา|เรียบ|กลับ)/):message_board.match(/ที่บอร์ด(.+?)(กรุณา|เรียบ|กลับ)/);
+    if (board_name) {
+      const extractedMatchBoardName = board_name[1].trim();
+      return extractedMatchBoardName ;
+    }
 };
 
-// const substring_boardname = (message) =>{
-//   const boardIndex = message.indexOf('บอร์ด')
-//       if (boardIndex !== -1) {
-//         const boardString = message.substr(boardIndex)
-//         let boardName = boardString.split(' ')[1]
-//         if(message.includes('กลับสู่สถานะออนไลน์') == true){
-//           return  boardName.replace('กลับสู่สถานะออนไลน์','');
-//         }
-//         else{
-//           return boardName
-//         }
-//       }
-// };
 
 </script>
 
@@ -478,15 +467,11 @@ const substring_BoardName = (message_board) => {
                                 <p :class="noti.notiStatusText == 'ปิด' ? 'text-[#827C7B]' : noti.notiStatusText == 'เปิด' ? 'text-[#01893D]' : noti.notiStatusText == 'ออนไลน์' ? 'text-[#154293]' : noti.notiStatusText == 'ออฟไลน์' ? 'text-[#D22626]' : 'text-[#827C7B]'"
                                   class="text-xs font-bold mb-2 break-words w-[200px]">
                                   <!-- เช็คสถานะแล้วตัด string -->
-                                  <span v-if="noti.notiStatus == '4'">{{
-                                    noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/, "").replace(/บอร์ด.*[A-Za-z0-9]/g, "").replace("ค่ะ", "")
-                                  }}</span>
-                                  <span v-else>{{
-                                    noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/, "").replace(/ที่บอร์ด.*[A-Za-z0-9]/g, "").replace("ค่ะ", "")
-                                  }}</span>
+                                  <!-- <span class="test ">{{ noti.message }}</span> -->
+                                  <span v-if="noti.notiStatus == '4'">{{ noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/, "").replace(/บอร์ด.*[A-Za-z0-9]\(\)/g,"").replace("ค่ะ", "") }}</span>
+                                  <span v-else>{{ noti.message.replace(/\d.*([0-9]{2}):([0-9]{2})/,"").replace(/ที่บอร์ด.*[A-Za-z0-9]\(\)/g, "").replace("ค่ะ", "")}}</span>
                                 </p>
-                                <p class="text-black text-sm font-medium truncate w-[200px]">บอร์ด {{
-                                  substring_BoardName(noti.message) }}</p>
+                                <p class="text-black text-sm font-medium truncate w-[200px]">บอร์ด {{ substring_BoardName(noti.message,noti.notiStatus) }}</p>
                                 <!-- <p class="text-black text-sm font-medium truncate w-[200px]" >บอร์ด {{ noti.message.match(/บอร์ด\s+(\w+)/)[1] }}</p> -->
                                 <!-- <p class="text-black text-sm font-medium truncate w-[200px]" >บอร์ด {{ noti.serialNumber }}</p> -->
                               </div>
@@ -495,13 +480,14 @@ const substring_BoardName = (message_board) => {
                           </div>
                         </div>
                         <div v-else>
-                          <div class="flex justify-center items-center w-custom w-[350px] sm:w-[350px] md:w-[350px] h-[360px] origin-top-right absolute custom-right -right-4 sm:right-0 mt-5 overflow-auto border-[#01893D] border rounded-[8px] shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
-                          <h1 class="text-sm text-gray-400">ยังไม่มีแจ้งเตือน</h1>
-                        </div>
+                          <div
+                            class="flex justify-center items-center w-custom w-[350px] sm:w-[350px] md:w-[350px] h-[360px] origin-top-right absolute custom-right -right-4 sm:right-0 mt-5 overflow-auto border-[#01893D] border rounded-[8px] shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                            <h1 class="text-sm text-gray-400">ยังไม่มีแจ้งเตือน</h1>
+                          </div>
                         </div>
                       </div>
                     </transition>
-                    
+
                   </Menu>
                 </div>
               </li>
@@ -591,14 +577,14 @@ const substring_BoardName = (message_board) => {
                   ]"
                     class="relative flex flex-col lg:flex-row items-center  pt-2 lg:space-x-4 hover:bg-[#D5E7D9] text-white box-slide-menu self-center md:p-4">
                     <img v-if="(item.name != 'Dashboard' &&
-                        (currentRoute() == 'ManageFarm' ||
-                          currentRoute() == 'SelectBoard' ||
-                          currentRoute() == 'SensorChart' ||
-                          currentRoute() == 'ExportExcel' ||
-                          currentRoute() == 'Climate' ||
-                          currentRoute() == 'Geography' ||
-                          currentRoute() == 'ActivityManage' ||
-                          currentRoute() == 'ViewActivity')) ||
+                      (currentRoute() == 'ManageFarm' ||
+                        currentRoute() == 'SelectBoard' ||
+                        currentRoute() == 'SensorChart' ||
+                        currentRoute() == 'ExportExcel' ||
+                        currentRoute() == 'Climate' ||
+                        currentRoute() == 'Geography' ||
+                        currentRoute() == 'ActivityManage' ||
+                        currentRoute() == 'ViewActivity')) ||
                       (currentRoute() != item.name &&
                         (currentRoute() != 'ManageFarm' ||
                           currentRoute() != 'SelectBoard' ||
