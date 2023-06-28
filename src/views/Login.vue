@@ -205,15 +205,15 @@ const submit_login = async () => {
   }
 };
 
-let show_visible = ref(false);
+let show_visible = ref(true);
 const showPassword = () => {
   var x = document.getElementById("password");
   if (x.type === "password") {
     x.type = "text";
-    show_visible.value = true;
+    show_visible.value = false;
   } else {
     x.type = "password";
-    show_visible.value = false;
+    show_visible.value = true;
   }
 };
 </script>

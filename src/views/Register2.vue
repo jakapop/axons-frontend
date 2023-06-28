@@ -137,18 +137,18 @@ const submit_ = async () => {
     });
   }
 };
-let show_visible = ref(false);
+let show_visible = ref(true);
 const showPassword = ()=>{
   var x = document.getElementById("password");
   var y = document.getElementById("confirmPassword");
   if (x.type === "password" || y.type === "password") {
     x.type = "text";
     y.type = "text"
-    show_visible.value = true ;
+    show_visible.value = false ;
   } else {
     x.type = "password";
     y.type = "password"
-    show_visible.value = false ;
+    show_visible.value = true ;
   }
 };
 </script>
